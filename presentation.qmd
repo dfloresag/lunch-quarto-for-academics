@@ -1,0 +1,247 @@
+---
+title: "Quarto for Academics"
+title-slide-attributes: 
+  data-background-image: "https://raw.githubusercontent.com/epfl-exts/exts-quarto-revealjs/main/logos/Extension-school-logo-2023-positif.png"
+  data-background-position: "25px 25px"
+  data-background-size: "200px" 
+  data-background-color: "#FFFFFF"
+subtitle: "With practical examples and illustrations"
+date: "Tuesday, 5 March 2024"
+format: 
+  revealjs:
+    transition: slide
+    background-transition: fade
+    logo: https://raw.githubusercontent.com/epfl-exts/exts-quarto-revealjs/main/logos/Extension-school-logo-2023-positif.png
+    footer: "R-lunch"
+    css: https://github.com/epfl-exts/exts-quarto-revealjs/blob/main/themes/theme.scss
+editor: visual
+self-contained: true
+---
+
+```{r r_setup}
+#| include: FALSE
+
+library(icons)
+
+# defining  some icons from the package {icon}
+icon_r <- fontawesome("r-project") 
+icon_data <- fontawesome("chart-pie")
+icon_line <- fontawesome("chart-line")
+icon_cap  <- fontawesome("graduation-cap")
+
+icon_spreadsheet <-  fontawesome("file-import")
+icon_broom <-  fontawesome("broom")
+icon_wrench <- fontawesome("wrench")
+icon_glasses <- fontawesome("glasses")
+icon_report <- fontawesome("file-contract")
+
+# setting up exts custom colors
+colorexts <- list(
+  red    =  "#cf0000",
+  grey   =  "#3F3C3A",
+  marine =  "#00A79F",
+  oil    =  "#425556",
+  white  =  "#FFFFFF"
+)
+
+```
+
+# Remember Rmarkdown?
+
+## R markdown was life-changing!
+
+[![Artwork by \@allison_horst](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/5e4c9baf-f2de-4083-8a01-ecb556f56c21.png?h=b23c712b77fffa0f33142709a8a87245){fig-alt="A glam rock band comprised of 3 fuzzy round monsters labeled as “Text”, “Outputs” and “Code” performing together. Stylized title text reads: “R Markdown - we’re getting the band back together.”" fig-align="center"}](https://twitter.com/allison_horst)
+
+# What is Quarto?
+
+# In the words of its creators...
+
+> ## Quarto is a multi-language, [next-generation](https://quarto.org/docs/faq/rmarkdown.html) version of R Markdown
+
+## Quarto is an...
+
+::: incremental
+-   ... **open-source**...
+
+-   ... **multi-language** and
+
+-   ... **multi-platfor publishing system.**
+:::
+
+## Multi-language
+
+::: panel-tabset
+## R
+
+::: columns
+::: {.column width="50%"}
+````{verbatim}
+---
+title: "ggplot2 demo"
+author: "Norah Jones"
+date: "5/22/2021"
+format: 
+  html:
+    fig-width: 8
+    fig-height: 4
+    code-fold: true
+---
+
+## Air Quality
+
+@fig-airquality further explores the impact of temperature on ozone level.
+
+```{r}
+#| label: fig-airquality
+#| fig-cap: "Temperature and ozone level."
+#| warning: false
+
+library(ggplot2)
+ggplot(airquality, aes(Temp, Ozone)) + 
+  geom_point() + 
+  geom_smooth(method = "loess")
+```
+````
+:::
+
+::: {.column width="50%"}
+![](https://quarto.org/images/hello-knitr.png){fig-align="center"}
+:::
+:::
+
+## Python
+
+::: columns
+::: {.column width="50%"}
+![](https://quarto.org/images/demo-jupyter-plain.png){fig-align="center"}
+:::
+
+::: {.column width="50%"}
+![](https://quarto.org/images/demo-jupyter-output.png)
+:::
+:::
+
+## Julia
+
+::: columns
+::: {.column width="50%"}
+````{verbatim}
+---
+title: "Plots Demo"
+author: "Norah Jones"
+date: "5/22/2021"
+format:
+  html:
+    code-fold: true
+jupyter: julia-1.8
+---
+
+## Parametric Plots
+
+Plot function pair (x(u), y(u)). 
+See @fig-parametric for an example.
+
+```{julia}
+#| label: fig-parametric
+#| fig-cap: "Parametric Plots"
+
+using Plots
+
+plot(sin, 
+     x->sin(2x), 
+     0, 
+     2π, 
+     leg=false, 
+     fill=(0,:lavender))
+```
+````
+:::
+
+::: {.column width="50%"}
+![](https://quarto.org/images/hello-julia.png)
+:::
+:::
+
+## Observable
+
+::: columns
+::: {.column width="50%"}
+````{verbatim}
+---
+title: "observable plot"
+author: "Norah Jones"
+format: 
+  html: 
+    code-fold: true
+---
+
+## Seattle Precipitation by Day (2012 to 2016)
+
+```{ojs}
+data = FileAttachment("seattle-weather.csv")
+  .csv({typed: true})
+  
+Plot.plot({
+  width: 800, height: 500, padding: 0,
+  color: { scheme: "blues", type: "sqrt"},
+  y: { tickFormat: i => "JFMAMJJASOND"[i] },
+  marks: [
+    Plot.cell(data, Plot.group({fill: "mean"}, {
+      x: d => new Date(d.date).getDate(),
+      y: d => new Date(d.date).getMonth(),
+      fill: "precipitation", 
+      inset: 0.5
+    }))
+  ]
+})
+```
+````
+:::
+
+::: {.column width="50%"}
+![](https://quarto.org/images/hello-observable.png)
+:::
+:::
+:::
+
+## Multi-platform
+
+::: panel-tabset
+## Rstudio {.smaller}
+
+![](https://quarto.org/docs/get-started/hello/images/rstudio-hello.png){width="20.83in"}
+
+## Jupyter Notebooks
+
+![](https://quarto.org/docs/get-started/hello/images/jupyter-quarto-preview.png){width="2000"}
+
+## VSCode
+
+![](https://quarto.org/docs/tools/images/vscode-render.png){width="2000"}
+
+## Text Editors
+
+![](https://quarto.org/docs/get-started/hello/images/text-editor-quarto-preview.png){width="2000"}
+:::
+
+# Quarto in Academia
+
+## (Hey! It's the title of the presentation)
+
+With quarto, we can take deal with many of the academic tasks
+
+::: fragment
+-   as a tool for **Presentation**
+
+    -   build engaging **courses** ...
+
+    -   ... and academic **talks**
+:::
+
+::: fragment
+-   as a tool for **typesetting** we can...
+
+    -   ... deploy **educational content** with ease in different **formats**
+
+    -   ... write **articles** with convenience, taking advantage of **journal templates**
+:::
