@@ -1,6 +1,4 @@
 ---
-author: "Daniel Flores Agreda"
-affiliation: "EPFL Digital Extension School"
 format: markdown_github
 ---
 

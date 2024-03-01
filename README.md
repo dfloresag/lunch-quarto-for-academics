@@ -1,4 +1,4 @@
-Daniel Flores Agreda
+
 
 # Quarto for Academics <a href="https://www.epfl.ch/education/continuing-education/"><img src="https://raw.githubusercontent.com/epfl-exts/exts-quarto-revealjs/main/logos/Extension-school-logo-2023-positif.png" align="right" height="138" /></a>
 
