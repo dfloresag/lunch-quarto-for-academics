@@ -214,7 +214,7 @@ Table&nbsp;1: The first six lines of the whole dataset
 <td style="text-align: right;">19.30107</td>
 <td style="text-align: right;">19.32071</td>
 <td style="text-align: right;">392467600</td>
-<td style="text-align: right;">16.91673</td>
+<td style="text-align: right;">16.91672</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">AAPL</td>
@@ -254,7 +254,7 @@ Table&nbsp;1: The first six lines of the whole dataset
 <td style="text-align: right;">19.11964</td>
 <td style="text-align: right;">19.16143</td>
 <td style="text-align: right;">279148800</td>
-<td style="text-align: right;">16.77725</td>
+<td style="text-align: right;">16.77726</td>
 </tr>
 </tbody>
 </table>
@@ -266,8 +266,10 @@ Table&nbsp;1: The first six lines of the whole dataset
 </section>
 <section id="tidying-the-data" class="level1">
 <h1>Tidying the data</h1>
-<section id="choosing-a-company" class="level2">
-<h2 class="anchored" data-anchor-id="choosing-a-company">Choosing a company</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Choosing a Company</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Choosing a Timeframe</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Filtering the data</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <ul>
 <li><p>A ticker can be stored in the variable <code>company_ticker</code>.</p></li>
 <li><p>Later, this will help us <em>parametrise</em> our report</p></li>
@@ -275,9 +277,8 @@ Table&nbsp;1: The first six lines of the whole dataset
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>company_ticker <span class="ot">&lt;-</span> <span class="st">"AAPL"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="choosing-a-timeframe" class="level2">
-<h2 class="anchored" data-anchor-id="choosing-a-timeframe">Choosing a timeframe</h2>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <ul>
 <li><p>To narrow our focus, we restrain our analysis to a given timeframe.</p></li>
 <li><p>We will focus on the performance of these stocks since the beginning of the COVID-19 pandemic (March 11 2020) until now.</p></li>
@@ -286,9 +287,8 @@ Table&nbsp;1: The first six lines of the whole dataset
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>start_date <span class="ot">&lt;-</span>  <span class="fu">ymd</span>(<span class="st">"2020-03-11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="filtering-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="filtering-the-data">Filtering the data</h2>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <ul>
 <li><p>We’re interested in the company APPLE INC, we can use the ticker AAPL</p></li>
 <li><p>We’ll use the <code>filter()</code> to subset the data for the company in the given timeframe.</p></li>
@@ -354,7 +354,7 @@ Table&nbsp;2: The first six lines of the apple dataset
 <td style="text-align: right;">63.2375</td>
 <td style="text-align: right;">69.4925</td>
 <td style="text-align: right;">370732000</td>
-<td style="text-align: right;">67.77602</td>
+<td style="text-align: right;">67.77600</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">AAPL</td>
@@ -384,7 +384,7 @@ Table&nbsp;2: The first six lines of the apple dataset
 <td style="text-align: right;">59.2800</td>
 <td style="text-align: right;">61.6675</td>
 <td style="text-align: right;">300233600</td>
-<td style="text-align: right;">60.14430</td>
+<td style="text-align: right;">60.14428</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">AAPL</td>
@@ -403,7 +403,9 @@ Table&nbsp;2: The first six lines of the apple dataset
 </figure>
 </div>
 </div>
-</section>
+</div>
+</div>
+</div>
 </section>
 <section id="understanding-the-data" class="level1">
 <h1>Understanding the data</h1>
@@ -445,8 +447,8 @@ r_t = \log(p_t) - \log(p_t) \approx \frac{p_t - p_{t-1}}{p_t}
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">daily_log_returns =</span> <span class="fu">log</span>(close)<span class="sc">-</span><span class="fu">log</span>(<span class="fu">lag</span>(close)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="visualizing-again-log-returns" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-again-log-returns">Visualizing again: log-returns</h2>
+<section id="visualize-again-log-returns" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-again-log-returns">Visualize again: log-returns</h2>
 <p>We can construct a visualisation with this. Additionally, we can add layers to our visualisation to decorate it at will.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>company_data <span class="sc">|&gt;</span> </span>
@@ -493,8 +495,8 @@ Look at the years!
 </div>
 </div>
 </section>
-<section id="some-summary-statistics" class="level2">
-<h2 class="anchored" data-anchor-id="some-summary-statistics">Some summary statistics</h2>
+<section id="model-create-summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="model-create-summary-statistics">Model: Create summary statistics</h2>
 <ul>
 <li><p>We can obtain a summary table for some summary statistics with <code>summarise()</code>.</p></li>
 <li><p>We will compute the average return <span class="math inline">\(\bar{r}\)</span> and estimate the standard deviation (SD) of the log-returns <span class="math inline">\(\hat{\sigma}\)</span></p></li>
@@ -538,23 +540,23 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 </figcaption>
 <div aria-describedby="tbl-summary-aapl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="lhdkmybqls" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lhdkmybqls table {
+<div id="jeirxvhrrb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jeirxvhrrb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lhdkmybqls thead, #lhdkmybqls tbody, #lhdkmybqls tfoot, #lhdkmybqls tr, #lhdkmybqls td, #lhdkmybqls th {
+#jeirxvhrrb thead, #jeirxvhrrb tbody, #jeirxvhrrb tfoot, #jeirxvhrrb tr, #jeirxvhrrb td, #jeirxvhrrb th {
   border-style: none;
 }
 
-#lhdkmybqls p {
+#jeirxvhrrb p {
   margin: 0;
   padding: 0;
 }
 
-#lhdkmybqls .gt_table {
+#jeirxvhrrb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -580,12 +582,12 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-left-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_caption {
+#jeirxvhrrb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lhdkmybqls .gt_title {
+#jeirxvhrrb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -597,7 +599,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-width: 0;
 }
 
-#lhdkmybqls .gt_subtitle {
+#jeirxvhrrb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -609,7 +611,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-top-width: 0;
 }
 
-#lhdkmybqls .gt_heading {
+#jeirxvhrrb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -621,13 +623,13 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_bottom_border {
+#jeirxvhrrb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_col_headings {
+#jeirxvhrrb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -642,7 +644,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_col_heading {
+#jeirxvhrrb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -662,7 +664,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   overflow-x: hidden;
 }
 
-#lhdkmybqls .gt_column_spanner_outer {
+#jeirxvhrrb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -674,15 +676,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 4px;
 }
 
-#lhdkmybqls .gt_column_spanner_outer:first-child {
+#jeirxvhrrb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lhdkmybqls .gt_column_spanner_outer:last-child {
+#jeirxvhrrb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lhdkmybqls .gt_column_spanner {
+#jeirxvhrrb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -694,11 +696,11 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   width: 100%;
 }
 
-#lhdkmybqls .gt_spanner_row {
+#jeirxvhrrb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lhdkmybqls .gt_group_heading {
+#jeirxvhrrb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -724,7 +726,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   text-align: left;
 }
 
-#lhdkmybqls .gt_empty_group_heading {
+#jeirxvhrrb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -739,15 +741,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   vertical-align: middle;
 }
 
-#lhdkmybqls .gt_from_md > :first-child {
+#jeirxvhrrb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lhdkmybqls .gt_from_md > :last-child {
+#jeirxvhrrb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lhdkmybqls .gt_row {
+#jeirxvhrrb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -766,7 +768,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   overflow-x: hidden;
 }
 
-#lhdkmybqls .gt_stub {
+#jeirxvhrrb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -779,7 +781,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#lhdkmybqls .gt_stub_row_group {
+#jeirxvhrrb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -793,15 +795,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   vertical-align: top;
 }
 
-#lhdkmybqls .gt_row_group_first td {
+#jeirxvhrrb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lhdkmybqls .gt_row_group_first th {
+#jeirxvhrrb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lhdkmybqls .gt_summary_row {
+#jeirxvhrrb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -811,16 +813,16 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#lhdkmybqls .gt_first_summary_row {
+#jeirxvhrrb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_first_summary_row.thick {
+#jeirxvhrrb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lhdkmybqls .gt_last_summary_row {
+#jeirxvhrrb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -830,7 +832,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_grand_summary_row {
+#jeirxvhrrb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -840,7 +842,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#lhdkmybqls .gt_first_grand_summary_row {
+#jeirxvhrrb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -850,7 +852,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-top-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_last_grand_summary_row_top {
+#jeirxvhrrb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -860,11 +862,11 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_striped {
+#jeirxvhrrb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lhdkmybqls .gt_table_body {
+#jeirxvhrrb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -873,7 +875,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_footnotes {
+#jeirxvhrrb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -887,7 +889,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_footnote {
+#jeirxvhrrb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -896,7 +898,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#lhdkmybqls .gt_sourcenotes {
+#jeirxvhrrb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -910,7 +912,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#lhdkmybqls .gt_sourcenote {
+#jeirxvhrrb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -918,63 +920,63 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#lhdkmybqls .gt_left {
+#jeirxvhrrb .gt_left {
   text-align: left;
 }
 
-#lhdkmybqls .gt_center {
+#jeirxvhrrb .gt_center {
   text-align: center;
 }
 
-#lhdkmybqls .gt_right {
+#jeirxvhrrb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lhdkmybqls .gt_font_normal {
+#jeirxvhrrb .gt_font_normal {
   font-weight: normal;
 }
 
-#lhdkmybqls .gt_font_bold {
+#jeirxvhrrb .gt_font_bold {
   font-weight: bold;
 }
 
-#lhdkmybqls .gt_font_italic {
+#jeirxvhrrb .gt_font_italic {
   font-style: italic;
 }
 
-#lhdkmybqls .gt_super {
+#jeirxvhrrb .gt_super {
   font-size: 65%;
 }
 
-#lhdkmybqls .gt_footnote_marks {
+#jeirxvhrrb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lhdkmybqls .gt_asterisk {
+#jeirxvhrrb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lhdkmybqls .gt_indent_1 {
+#jeirxvhrrb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lhdkmybqls .gt_indent_2 {
+#jeirxvhrrb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lhdkmybqls .gt_indent_3 {
+#jeirxvhrrb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lhdkmybqls .gt_indent_4 {
+#jeirxvhrrb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lhdkmybqls .gt_indent_5 {
+#jeirxvhrrb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -985,7 +987,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 <th colspan="2" class="gt_heading gt_title gt_font_normal">Summary statistics of Tech companies stocks</th>
 </tr>
 <tr class="odd gt_heading">
-<th colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">From 11 Mar, 2020 to 01 Mar, 2024</th>
+<th colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">From 11 Mar, 2020 to 03 Mar, 2024</th>
 </tr>
 <tr class="header gt_col_headings">
 <th id="Average Return" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Average Return</th>
@@ -1006,39 +1008,54 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 </figure>
 </div>
 </div>
-</section>
-<section id="summary-statistics-by-year" class="level2">
-<h2 class="anchored" data-anchor-id="summary-statistics-by-year">Summary statistics by year</h2>
+<section id="summary-statistics-by-year" class="level3">
+<h3 class="anchored" data-anchor-id="summary-statistics-by-year">Summary statistics by year</h3>
 <p>And, seeing that the visualisation shows periods of high volatility in the year 2020, we can compute yearly measures of risk and volatility:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>company_data <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span> </span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Average Return</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(daily_log_returns, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Average Risk (SD)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sd</span>(daily_log_returns, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Risk (SD)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sd</span>(daily_log_returns, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span> <span class="st">"Summary statistics of Tech companies stocks"</span>,</span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle  =</span> <span class="fu">str_glue</span>(<span class="st">"From {start_date |&gt; format('%d %b, %Y')} to {Sys.Date() |&gt; format('%d %b, %Y')}"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">decimals  =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="sc">-</span>year, <span class="at">decimals  =</span> <span class="dv">4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"lightgreen"</span>), </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)), </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> </span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span> <span class="st">`</span><span class="at">Average Return</span><span class="st">`</span>, </span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">Average Return</span><span class="st">`</span> <span class="sc">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"red"</span>), </span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)), </span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> </span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span> <span class="st">`</span><span class="at">Risk (SD)</span><span class="st">`</span>, </span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">Risk (SD)</span><span class="st">`</span> <span class="sc">&gt;</span><span class="fl">0.020</span>)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="lhnapdxuqx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lhnapdxuqx table {
+<div id="ustmmgyqgo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ustmmgyqgo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lhnapdxuqx thead, #lhnapdxuqx tbody, #lhnapdxuqx tfoot, #lhnapdxuqx tr, #lhnapdxuqx td, #lhnapdxuqx th {
+#ustmmgyqgo thead, #ustmmgyqgo tbody, #ustmmgyqgo tfoot, #ustmmgyqgo tr, #ustmmgyqgo td, #ustmmgyqgo th {
   border-style: none;
 }
 
-#lhnapdxuqx p {
+#ustmmgyqgo p {
   margin: 0;
   padding: 0;
 }
 
-#lhnapdxuqx .gt_table {
+#ustmmgyqgo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1064,12 +1081,12 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-left-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_caption {
+#ustmmgyqgo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lhnapdxuqx .gt_title {
+#ustmmgyqgo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1081,7 +1098,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-width: 0;
 }
 
-#lhnapdxuqx .gt_subtitle {
+#ustmmgyqgo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1093,7 +1110,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-top-width: 0;
 }
 
-#lhnapdxuqx .gt_heading {
+#ustmmgyqgo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1105,13 +1122,13 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_bottom_border {
+#ustmmgyqgo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_col_headings {
+#ustmmgyqgo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1126,7 +1143,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_col_heading {
+#ustmmgyqgo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1146,7 +1163,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   overflow-x: hidden;
 }
 
-#lhnapdxuqx .gt_column_spanner_outer {
+#ustmmgyqgo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1158,15 +1175,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 4px;
 }
 
-#lhnapdxuqx .gt_column_spanner_outer:first-child {
+#ustmmgyqgo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lhnapdxuqx .gt_column_spanner_outer:last-child {
+#ustmmgyqgo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lhnapdxuqx .gt_column_spanner {
+#ustmmgyqgo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1178,11 +1195,11 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   width: 100%;
 }
 
-#lhnapdxuqx .gt_spanner_row {
+#ustmmgyqgo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lhnapdxuqx .gt_group_heading {
+#ustmmgyqgo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1208,7 +1225,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   text-align: left;
 }
 
-#lhnapdxuqx .gt_empty_group_heading {
+#ustmmgyqgo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1223,15 +1240,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   vertical-align: middle;
 }
 
-#lhnapdxuqx .gt_from_md > :first-child {
+#ustmmgyqgo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lhnapdxuqx .gt_from_md > :last-child {
+#ustmmgyqgo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lhnapdxuqx .gt_row {
+#ustmmgyqgo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1250,7 +1267,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   overflow-x: hidden;
 }
 
-#lhnapdxuqx .gt_stub {
+#ustmmgyqgo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1263,7 +1280,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#lhnapdxuqx .gt_stub_row_group {
+#ustmmgyqgo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1277,15 +1294,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   vertical-align: top;
 }
 
-#lhnapdxuqx .gt_row_group_first td {
+#ustmmgyqgo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lhnapdxuqx .gt_row_group_first th {
+#ustmmgyqgo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lhnapdxuqx .gt_summary_row {
+#ustmmgyqgo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1295,16 +1312,16 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#lhnapdxuqx .gt_first_summary_row {
+#ustmmgyqgo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_first_summary_row.thick {
+#ustmmgyqgo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lhnapdxuqx .gt_last_summary_row {
+#ustmmgyqgo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1314,7 +1331,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_grand_summary_row {
+#ustmmgyqgo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1324,7 +1341,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#lhnapdxuqx .gt_first_grand_summary_row {
+#ustmmgyqgo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1334,7 +1351,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-top-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_last_grand_summary_row_top {
+#ustmmgyqgo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1344,11 +1361,11 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_striped {
+#ustmmgyqgo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lhnapdxuqx .gt_table_body {
+#ustmmgyqgo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1357,7 +1374,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_footnotes {
+#ustmmgyqgo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1371,7 +1388,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_footnote {
+#ustmmgyqgo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1380,7 +1397,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#lhnapdxuqx .gt_sourcenotes {
+#ustmmgyqgo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1394,7 +1411,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#lhnapdxuqx .gt_sourcenote {
+#ustmmgyqgo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1402,63 +1419,63 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#lhnapdxuqx .gt_left {
+#ustmmgyqgo .gt_left {
   text-align: left;
 }
 
-#lhnapdxuqx .gt_center {
+#ustmmgyqgo .gt_center {
   text-align: center;
 }
 
-#lhnapdxuqx .gt_right {
+#ustmmgyqgo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lhnapdxuqx .gt_font_normal {
+#ustmmgyqgo .gt_font_normal {
   font-weight: normal;
 }
 
-#lhnapdxuqx .gt_font_bold {
+#ustmmgyqgo .gt_font_bold {
   font-weight: bold;
 }
 
-#lhnapdxuqx .gt_font_italic {
+#ustmmgyqgo .gt_font_italic {
   font-style: italic;
 }
 
-#lhnapdxuqx .gt_super {
+#ustmmgyqgo .gt_super {
   font-size: 65%;
 }
 
-#lhnapdxuqx .gt_footnote_marks {
+#ustmmgyqgo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lhnapdxuqx .gt_asterisk {
+#ustmmgyqgo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lhnapdxuqx .gt_indent_1 {
+#ustmmgyqgo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lhnapdxuqx .gt_indent_2 {
+#ustmmgyqgo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lhnapdxuqx .gt_indent_3 {
+#ustmmgyqgo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lhnapdxuqx .gt_indent_4 {
+#ustmmgyqgo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lhnapdxuqx .gt_indent_5 {
+#ustmmgyqgo .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1469,39 +1486,39 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 <th colspan="3" class="gt_heading gt_title gt_font_normal">Summary statistics of Tech companies stocks</th>
 </tr>
 <tr class="odd gt_heading">
-<th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">From 11 Mar, 2020 to 01 Mar, 2024</th>
+<th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">From 11 Mar, 2020 to 03 Mar, 2024</th>
 </tr>
 <tr class="header gt_col_headings">
 <th id="year" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">year</th>
 <th id="Average Return" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Average Return</th>
-<th id="Average Risk (SD)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Average Risk (SD)</th>
+<th id="Risk (SD)" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Risk (SD)</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_right" headers="year">2,020.0000</td>
-<td class="gt_row gt_right" headers="Average Return">0.0037</td>
-<td class="gt_row gt_right" headers="Average Risk (SD)">0.0283</td>
+<td class="gt_row gt_right" headers="year">2020</td>
+<td class="gt_row gt_right" headers="Average Return" style="background-color: #90EE90; color: #FFFFFF">0.0037</td>
+<td class="gt_row gt_right" headers="Risk (SD)" style="background-color: #FF0000; color: #FFFFFF">0.0283</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_right" headers="year">2,021.0000</td>
-<td class="gt_row gt_right" headers="Average Return">0.0012</td>
-<td class="gt_row gt_right" headers="Average Risk (SD)">0.0158</td>
+<td class="gt_row gt_right" headers="year">2021</td>
+<td class="gt_row gt_right" headers="Average Return" style="background-color: #90EE90; color: #FFFFFF">0.0012</td>
+<td class="gt_row gt_right" headers="Risk (SD)">0.0158</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_right" headers="year">2,022.0000</td>
+<td class="gt_row gt_right" headers="year">2022</td>
 <td class="gt_row gt_right" headers="Average Return">−0.0012</td>
-<td class="gt_row gt_right" headers="Average Risk (SD)">0.0224</td>
+<td class="gt_row gt_right" headers="Risk (SD)" style="background-color: #FF0000; color: #FFFFFF">0.0224</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_right" headers="year">2,023.0000</td>
-<td class="gt_row gt_right" headers="Average Return">0.0016</td>
-<td class="gt_row gt_right" headers="Average Risk (SD)">0.0128</td>
+<td class="gt_row gt_right" headers="year">2023</td>
+<td class="gt_row gt_right" headers="Average Return" style="background-color: #90EE90; color: #FFFFFF">0.0016</td>
+<td class="gt_row gt_right" headers="Risk (SD)">0.0128</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_right" headers="year">2,024.0000</td>
-<td class="gt_row gt_right" headers="Average Return">−0.0015</td>
-<td class="gt_row gt_right" headers="Average Risk (SD)">0.0120</td>
+<td class="gt_row gt_right" headers="year">2024</td>
+<td class="gt_row gt_right" headers="Average Return">−0.0016</td>
+<td class="gt_row gt_right" headers="Risk (SD)">0.0119</td>
 </tr>
 </tbody>
 </table>
@@ -1509,10 +1526,28 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Look at the years (again)!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We’re highlighting the years where the risk is higher. These numbers reflect the remarks we’ve made in the previous points, namely that global uncertainties have affected the risk of this stock.</p>
+</div>
+</div>
+</section>
 </section>
 </section>
 <section id="analyzing-multiple-companies" class="level1">
 <h1>Analyzing multiple companies</h1>
+<ul>
+<li><p>Now we’ll carry the same analysis for multiple companies</p></li>
+<li><p>We import the data and prepare it for analysis</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>returns_data <span class="ot">&lt;-</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  stocks_data <span class="sc">|&gt;</span> </span>
@@ -1520,10 +1555,13 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(symbol,date, close) <span class="sc">|&gt;</span> </span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(symbol) <span class="sc">|&gt;</span> </span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">daily_log_returns =</span> <span class="fu">log</span>(close) <span class="sc">-</span> <span class="fu">log</span>(<span class="fu">lag</span>(close))) <span class="sc">|&gt;</span> </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="plotting-the-stock-price" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-the-stock-price">Plotting the stock price</h2>
+<ul>
+<li>Let’s plot the whole</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>returns_data <span class="sc">|&gt;</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> close,  <span class="at">group =</span> symbol, <span class="at">color =</span> symbol))<span class="sc">+</span></span>
@@ -1537,40 +1575,135 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> company_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="1-report_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-all-stocks" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-all-stocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-report_files/figure-html/fig-all-stocks-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-all-stocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Stocks prices for all companies in the selected period
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A single chart is not very satisfactory, even if we try to make differentiate companies with colors.</p>
+<ul>
+<li>A single chart is not very satisfactory, even if we try to make differentiate companies with colors.</li>
+</ul>
 </section>
 <section id="visualising-the-log-returns" class="level2">
 <h2 class="anchored" data-anchor-id="visualising-the-log-returns">Visualising the log-returns</h2>
-<p>As the interest is in the <code>log</code>-returns, let’s plot the returns in a single frame</p>
+<ul>
+<li>As the interest is in the <code>log</code>-returns, let’s plot the returns in a single frame</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>returns_data <span class="sc">|&gt;</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> daily_log_returns,  <span class="at">group =</span> symbol, <span class="at">color =</span> symbol))<span class="sc">+</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">str_glue</span>(<span class="st">"Daily Returns of the stock for {glue::glue_collapse(company_tickers, sep = ', ')}"</span>), </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">str_glue</span>(<span class="st">"Daily Returns of the stock for all companies"</span>), </span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">str_glue</span>(<span class="st">"Close stock prices since {start_date |&gt; format('%d %B, %Y')}"</span>),</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date"</span>,</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Returns"</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> </span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(symbol)) <span class="sc">+</span> </span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span> </span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> company_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span> </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> company_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="1-report_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-log-returns-all-stocks" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-log-returns-all-stocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-report_files/figure-html/fig-log-returns-all-stocks-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-returns-all-stocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Log returns of all companies
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Create a faceted chart
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>There’s a problem here, as you can see. The log-returns are confounded and become difficult to distinguish in spite of the use of relevant colors!</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="creating-a-faceted-chart" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-faceted-chart">Creating a faceted chart</h2>
+<ul>
+<li><p>To distinguish better, we can use the function <code>facet_wrap()</code> .</p></li>
+<li><p>This creates a _mini_ plot according to a variable</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a>returns_data <span class="sc">|&gt;</span> </span>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> daily_log_returns,  <span class="at">group =</span> symbol, <span class="at">color =</span> symbol))<span class="sc">+</span></span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-11-4"><a href="#annotated-cell-11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">str_glue</span>(<span class="st">"Daily Returns of the stock for all companies"</span>), </span>
+<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">str_glue</span>(<span class="st">"Close stock prices since {start_date |&gt; format('%d %B, %Y')}"</span>),</span>
+<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="annotated-cell-11-8"><a href="#annotated-cell-11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Returns"</span></span>
+<span id="annotated-cell-11-9"><a href="#annotated-cell-11-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> </span>
+<span id="annotated-cell-11-10"><a href="#annotated-cell-11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();" href="">1</a><span id="annotated-cell-11-11" class="code-annotation-target"><a href="#annotated-cell-11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(symbol)) <span class="sc">+</span></span>
+<span id="annotated-cell-11-12"><a href="#annotated-cell-11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span> </span>
+<span id="annotated-cell-11-13"><a href="#annotated-cell-11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> company_colors)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="11" data-code-annotation="1">On this line we added the faceted chart</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div id="fig-log-returns-all-stocks-faceted" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-log-returns-all-stocks-faceted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-report_files/figure-html/fig-log-returns-all-stocks-faceted-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-returns-all-stocks-faceted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Log returns of all companies - faceted
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What can we see?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Uncertainties in the supply chains produced by the international crises seem to have affected companies in the same way</p></li>
+<li><p>However the magnitude of these impacts seems to have been different across companies, e.g.</p>
+<ul>
+<li>TSLA shows significantly more risk</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="average-returns-for-all-companies" class="level2">
+<h2 class="anchored" data-anchor-id="average-returns-for-all-companies">Average Returns for all companies</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mean_and_sd <span class="ot">&lt;-</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  returns_data <span class="sc">|&gt;</span> </span>
@@ -1579,34 +1712,79 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">average_return =</span> <span class="fu">mean</span>(daily_log_returns, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_return =</span> <span class="fu">sd</span>(daily_log_returns, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    ) </span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>mean_and_sd <span class="sc">|&gt;</span> </span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>sd_return) <span class="sc">|&gt;</span> </span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year,<span class="at">values_from =</span> average_return) <span class="sc">|&gt;</span> </span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span> <span class="st">"Average Yearly returns of Tech companies"</span>,</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle  =</span> <span class="fu">str_glue</span>(<span class="st">"From {start_date |&gt; format('%d %b, %Y')} to {Sys.Date() |&gt; format('%d %b, %Y')}"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="sc">-</span>symbol, <span class="at">decimals  =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>mean_and_sd <span class="sc">|&gt;</span> </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>sd_return) <span class="sc">|&gt;</span> </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year,<span class="at">values_from =</span> average_return) <span class="sc">|&gt;</span> </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span> <span class="st">"Average Yearly returns of Tech companies"</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle  =</span> <span class="fu">str_glue</span>(<span class="st">"From {start_date |&gt; format('%d %b, %Y')} to {Sys.Date() |&gt; format('%d %b, %Y')}"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="sc">-</span>symbol, <span class="at">decimals  =</span> <span class="dv">4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"lightgreen"</span>), </span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)), </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">list</span>(</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>, </span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2020</span><span class="st">`</span><span class="sc">&gt;</span><span class="dv">0</span> ), </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2021</span><span class="st">`</span>, </span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2021</span><span class="st">`</span><span class="sc">&gt;</span><span class="dv">0</span> ), </span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>, </span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2022</span><span class="st">`</span><span class="sc">&gt;</span><span class="dv">0</span> ), </span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>, </span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2022</span><span class="st">`</span><span class="sc">&gt;</span><span class="dv">0</span> ), </span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2023</span><span class="st">`</span>, </span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2023</span><span class="st">`</span><span class="sc">&gt;</span><span class="dv">0</span> ), </span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2024</span><span class="st">`</span>, </span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2024</span><span class="st">`</span><span class="sc">&gt;</span><span class="dv">0</span> )</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"red"</span>), </span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)), </span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">locations =</span> <span class="fu">list</span>(</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>, </span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2020</span><span class="st">`</span><span class="sc">&lt;=</span><span class="dv">0</span> ), </span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2021</span><span class="st">`</span>, </span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2021</span><span class="st">`</span><span class="sc">&lt;=</span><span class="dv">0</span> ), </span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>, </span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2022</span><span class="st">`</span><span class="sc">&lt;=</span><span class="dv">0</span> ), </span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>, </span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2022</span><span class="st">`</span><span class="sc">&lt;=</span> <span class="dv">0</span> ), </span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2023</span><span class="st">`</span>, </span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2023</span><span class="st">`</span><span class="sc">&lt;=</span><span class="dv">0</span> ), </span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2024</span><span class="st">`</span>, </span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2024</span><span class="st">`</span><span class="sc">&lt;=</span><span class="dv">0</span> )</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-average-returns-all-companies" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-average-returns-all-companies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Average Returns for all companies
+</figcaption>
+<div aria-describedby="tbl-average-returns-all-companies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="jsxtafekdd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jsxtafekdd table {
+<div id="uednkswkgf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uednkswkgf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jsxtafekdd thead, #jsxtafekdd tbody, #jsxtafekdd tfoot, #jsxtafekdd tr, #jsxtafekdd td, #jsxtafekdd th {
+#uednkswkgf thead, #uednkswkgf tbody, #uednkswkgf tfoot, #uednkswkgf tr, #uednkswkgf td, #uednkswkgf th {
   border-style: none;
 }
 
-#jsxtafekdd p {
+#uednkswkgf p {
   margin: 0;
   padding: 0;
 }
 
-#jsxtafekdd .gt_table {
+#uednkswkgf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1632,12 +1810,12 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-left-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_caption {
+#uednkswkgf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jsxtafekdd .gt_title {
+#uednkswkgf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1649,7 +1827,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-width: 0;
 }
 
-#jsxtafekdd .gt_subtitle {
+#uednkswkgf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1661,7 +1839,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-top-width: 0;
 }
 
-#jsxtafekdd .gt_heading {
+#uednkswkgf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1673,13 +1851,13 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_bottom_border {
+#uednkswkgf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_col_headings {
+#uednkswkgf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1694,7 +1872,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_col_heading {
+#uednkswkgf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1714,7 +1892,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   overflow-x: hidden;
 }
 
-#jsxtafekdd .gt_column_spanner_outer {
+#uednkswkgf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1726,15 +1904,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 4px;
 }
 
-#jsxtafekdd .gt_column_spanner_outer:first-child {
+#uednkswkgf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jsxtafekdd .gt_column_spanner_outer:last-child {
+#uednkswkgf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jsxtafekdd .gt_column_spanner {
+#uednkswkgf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1746,11 +1924,11 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   width: 100%;
 }
 
-#jsxtafekdd .gt_spanner_row {
+#uednkswkgf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jsxtafekdd .gt_group_heading {
+#uednkswkgf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1776,7 +1954,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   text-align: left;
 }
 
-#jsxtafekdd .gt_empty_group_heading {
+#uednkswkgf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1791,15 +1969,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   vertical-align: middle;
 }
 
-#jsxtafekdd .gt_from_md > :first-child {
+#uednkswkgf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jsxtafekdd .gt_from_md > :last-child {
+#uednkswkgf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jsxtafekdd .gt_row {
+#uednkswkgf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1818,7 +1996,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   overflow-x: hidden;
 }
 
-#jsxtafekdd .gt_stub {
+#uednkswkgf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1831,7 +2009,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#jsxtafekdd .gt_stub_row_group {
+#uednkswkgf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1845,15 +2023,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   vertical-align: top;
 }
 
-#jsxtafekdd .gt_row_group_first td {
+#uednkswkgf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jsxtafekdd .gt_row_group_first th {
+#uednkswkgf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jsxtafekdd .gt_summary_row {
+#uednkswkgf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1863,16 +2041,16 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#jsxtafekdd .gt_first_summary_row {
+#uednkswkgf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_first_summary_row.thick {
+#uednkswkgf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jsxtafekdd .gt_last_summary_row {
+#uednkswkgf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1882,7 +2060,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_grand_summary_row {
+#uednkswkgf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1892,7 +2070,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#jsxtafekdd .gt_first_grand_summary_row {
+#uednkswkgf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1902,7 +2080,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-top-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_last_grand_summary_row_top {
+#uednkswkgf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1912,11 +2090,11 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_striped {
+#uednkswkgf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jsxtafekdd .gt_table_body {
+#uednkswkgf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1925,7 +2103,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_footnotes {
+#uednkswkgf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1939,7 +2117,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_footnote {
+#uednkswkgf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1948,7 +2126,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#jsxtafekdd .gt_sourcenotes {
+#uednkswkgf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1962,7 +2140,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#jsxtafekdd .gt_sourcenote {
+#uednkswkgf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1970,76 +2148,77 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#jsxtafekdd .gt_left {
+#uednkswkgf .gt_left {
   text-align: left;
 }
 
-#jsxtafekdd .gt_center {
+#uednkswkgf .gt_center {
   text-align: center;
 }
 
-#jsxtafekdd .gt_right {
+#uednkswkgf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jsxtafekdd .gt_font_normal {
+#uednkswkgf .gt_font_normal {
   font-weight: normal;
 }
 
-#jsxtafekdd .gt_font_bold {
+#uednkswkgf .gt_font_bold {
   font-weight: bold;
 }
 
-#jsxtafekdd .gt_font_italic {
+#uednkswkgf .gt_font_italic {
   font-style: italic;
 }
 
-#jsxtafekdd .gt_super {
+#uednkswkgf .gt_super {
   font-size: 65%;
 }
 
-#jsxtafekdd .gt_footnote_marks {
+#uednkswkgf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jsxtafekdd .gt_asterisk {
+#uednkswkgf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jsxtafekdd .gt_indent_1 {
+#uednkswkgf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jsxtafekdd .gt_indent_2 {
+#uednkswkgf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jsxtafekdd .gt_indent_3 {
+#uednkswkgf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jsxtafekdd .gt_indent_4 {
+#uednkswkgf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jsxtafekdd .gt_indent_5 {
+#uednkswkgf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
-<th colspan="5" class="gt_heading gt_title gt_font_normal">Average Yearly returns of Tech companies</th>
+<th colspan="6" class="gt_heading gt_title gt_font_normal">Average Yearly returns of Tech companies</th>
 </tr>
 <tr class="odd gt_heading">
-<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">From 11 Mar, 2020 to 01 Mar, 2024</th>
+<th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">From 11 Mar, 2020 to 03 Mar, 2024</th>
 </tr>
 <tr class="header gt_col_headings">
+<th id="symbol" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">symbol</th>
 <th id="2020" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">2020</th>
 <th id="2021" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">2021</th>
 <th id="2022" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">2022</th>
@@ -2048,55 +2227,45 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 </tr>
 </thead>
 <tbody class="gt_table_body">
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="AAPL" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">AAPL</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="symbol">AAPL</td>
+<td class="gt_row gt_right" headers="2020" style="background-color: #90EE90; color: #FFFFFF">0.0037</td>
+<td class="gt_row gt_right" headers="2021" style="background-color: #90EE90; color: #FFFFFF">0.0012</td>
+<td class="gt_row gt_right" headers="2022" style="background-color: #FF0000; color: #FFFFFF">−0.0012</td>
+<td class="gt_row gt_right" headers="2023" style="background-color: #90EE90; color: #FFFFFF">0.0016</td>
+<td class="gt_row gt_right" headers="2024" style="background-color: #FF0000; color: #FFFFFF">−0.0016</td>
 </tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="AAPL  2020">0.0037</td>
-<td class="gt_row gt_right" headers="AAPL  2021">0.0012</td>
-<td class="gt_row gt_right" headers="AAPL  2022">−0.0012</td>
-<td class="gt_row gt_right" headers="AAPL  2023">0.0016</td>
-<td class="gt_row gt_right" headers="AAPL  2024">−0.0015</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="symbol">AMZN</td>
+<td class="gt_row gt_right" headers="2020" style="background-color: #90EE90; color: #FFFFFF">0.0033</td>
+<td class="gt_row gt_right" headers="2021" style="background-color: #90EE90; color: #FFFFFF">0.0001</td>
+<td class="gt_row gt_right" headers="2022" style="background-color: #FF0000; color: #FFFFFF">−0.0027</td>
+<td class="gt_row gt_right" headers="2023" style="background-color: #90EE90; color: #FFFFFF">0.0024</td>
+<td class="gt_row gt_right" headers="2024" style="background-color: #90EE90; color: #FFFFFF">0.0038</td>
 </tr>
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="AMZN" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">AMZN</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="symbol">GOOG</td>
+<td class="gt_row gt_right" headers="2020" style="background-color: #90EE90; color: #FFFFFF">0.0022</td>
+<td class="gt_row gt_right" headers="2021" style="background-color: #90EE90; color: #FFFFFF">0.0020</td>
+<td class="gt_row gt_right" headers="2022" style="background-color: #FF0000; color: #FFFFFF">−0.0019</td>
+<td class="gt_row gt_right" headers="2023" style="background-color: #90EE90; color: #FFFFFF">0.0019</td>
+<td class="gt_row gt_right" headers="2024" style="background-color: #FF0000; color: #FFFFFF">−0.0005</td>
 </tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="AMZN  2020">0.0033</td>
-<td class="gt_row gt_right" headers="AMZN  2021">0.0001</td>
-<td class="gt_row gt_right" headers="AMZN  2022">−0.0027</td>
-<td class="gt_row gt_right" headers="AMZN  2023">0.0024</td>
-<td class="gt_row gt_right" headers="AMZN  2024">0.0037</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="symbol">MSFT</td>
+<td class="gt_row gt_right" headers="2020" style="background-color: #90EE90; color: #FFFFFF">0.0023</td>
+<td class="gt_row gt_right" headers="2021" style="background-color: #90EE90; color: #FFFFFF">0.0016</td>
+<td class="gt_row gt_right" headers="2022" style="background-color: #FF0000; color: #FFFFFF">−0.0013</td>
+<td class="gt_row gt_right" headers="2023" style="background-color: #90EE90; color: #FFFFFF">0.0018</td>
+<td class="gt_row gt_right" headers="2024" style="background-color: #90EE90; color: #FFFFFF">0.0024</td>
 </tr>
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="GOOG" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">GOOG</td>
-</tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="GOOG  2020">0.0022</td>
-<td class="gt_row gt_right" headers="GOOG  2021">0.0020</td>
-<td class="gt_row gt_right" headers="GOOG  2022">−0.0019</td>
-<td class="gt_row gt_right" headers="GOOG  2023">0.0019</td>
-<td class="gt_row gt_right" headers="GOOG  2024">−0.0002</td>
-</tr>
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="MSFT" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">MSFT</td>
-</tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="MSFT  2020">0.0023</td>
-<td class="gt_row gt_right" headers="MSFT  2021">0.0016</td>
-<td class="gt_row gt_right" headers="MSFT  2022">−0.0013</td>
-<td class="gt_row gt_right" headers="MSFT  2023">0.0018</td>
-<td class="gt_row gt_right" headers="MSFT  2024">0.0023</td>
-</tr>
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="TSLA" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">TSLA</td>
-</tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="TSLA  2020">0.0090</td>
-<td class="gt_row gt_right" headers="TSLA  2021">0.0016</td>
-<td class="gt_row gt_right" headers="TSLA  2022">−0.0042</td>
-<td class="gt_row gt_right" headers="TSLA  2023">0.0028</td>
-<td class="gt_row gt_right" headers="TSLA  2024">−0.0051</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="symbol">TSLA</td>
+<td class="gt_row gt_right" headers="2020" style="background-color: #90EE90; color: #FFFFFF">0.0090</td>
+<td class="gt_row gt_right" headers="2021" style="background-color: #90EE90; color: #FFFFFF">0.0016</td>
+<td class="gt_row gt_right" headers="2022" style="background-color: #FF0000; color: #FFFFFF">−0.0042</td>
+<td class="gt_row gt_right" headers="2023" style="background-color: #90EE90; color: #FFFFFF">0.0028</td>
+<td class="gt_row gt_right" headers="2024" style="background-color: #FF0000; color: #FFFFFF">−0.0049</td>
 </tr>
 </tbody>
 </table>
@@ -2104,6 +2273,12 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 </div>
 </div>
 </div>
+</figure>
+</div>
+</div>
+</section>
+<section id="risk-sd-all-companies" class="level2">
+<h2 class="anchored" data-anchor-id="risk-sd-all-companies">Risk (SD) all companies</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mean_and_sd <span class="sc">|&gt;</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>average_return) <span class="sc">|&gt;</span> </span>
@@ -2112,25 +2287,50 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span> <span class="st">"Average Yearly SDs of Tech companies"</span>,</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle  =</span> <span class="fu">str_glue</span>(<span class="st">"From {start_date |&gt; format('%d %b, %Y')} to {Sys.Date() |&gt; format('%d %b, %Y')}"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="sc">-</span>symbol, <span class="at">decimals  =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="sc">-</span>symbol, <span class="at">decimals  =</span> <span class="dv">4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"red"</span>), </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"white"</span>)), </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">locations =</span> <span class="fu">list</span>(</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2020</span><span class="st">`</span>, </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2020</span><span class="st">`</span><span class="sc">&gt;=</span><span class="fl">0.020</span>), </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2021</span><span class="st">`</span>, </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2021</span><span class="st">`</span><span class="sc">&gt;=</span><span class="fl">0.020</span> ), </span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>, </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2022</span><span class="st">`</span><span class="sc">&gt;=</span><span class="fl">0.020</span>  ), </span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>, </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2022</span><span class="st">`</span><span class="sc">&gt;=</span><span class="fl">0.020</span>  ), </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>       <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2023</span><span class="st">`</span>, </span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2023</span><span class="st">`</span><span class="sc">&gt;=</span><span class="fl">0.020</span>  ), </span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cells_body</span>(<span class="at">columns =</span><span class="st">`</span><span class="at">2024</span><span class="st">`</span>, </span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rows=</span> <span class="st">`</span><span class="at">2024</span><span class="st">`</span><span class="sc">&gt;=</span><span class="fl">0.020</span>)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-risk-all-companies" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-risk-all-companies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Risk (SD) all companies in the period
+</figcaption>
+<div aria-describedby="tbl-risk-all-companies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="rcysjgrqjw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rcysjgrqjw table {
+<div id="urlfdyvret" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#urlfdyvret table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rcysjgrqjw thead, #rcysjgrqjw tbody, #rcysjgrqjw tfoot, #rcysjgrqjw tr, #rcysjgrqjw td, #rcysjgrqjw th {
+#urlfdyvret thead, #urlfdyvret tbody, #urlfdyvret tfoot, #urlfdyvret tr, #urlfdyvret td, #urlfdyvret th {
   border-style: none;
 }
 
-#rcysjgrqjw p {
+#urlfdyvret p {
   margin: 0;
   padding: 0;
 }
 
-#rcysjgrqjw .gt_table {
+#urlfdyvret .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2156,12 +2356,12 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-left-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_caption {
+#urlfdyvret .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rcysjgrqjw .gt_title {
+#urlfdyvret .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2173,7 +2373,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-width: 0;
 }
 
-#rcysjgrqjw .gt_subtitle {
+#urlfdyvret .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2185,7 +2385,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-top-width: 0;
 }
 
-#rcysjgrqjw .gt_heading {
+#urlfdyvret .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2197,13 +2397,13 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_bottom_border {
+#urlfdyvret .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_col_headings {
+#urlfdyvret .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2218,7 +2418,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_col_heading {
+#urlfdyvret .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2238,7 +2438,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   overflow-x: hidden;
 }
 
-#rcysjgrqjw .gt_column_spanner_outer {
+#urlfdyvret .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2250,15 +2450,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 4px;
 }
 
-#rcysjgrqjw .gt_column_spanner_outer:first-child {
+#urlfdyvret .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rcysjgrqjw .gt_column_spanner_outer:last-child {
+#urlfdyvret .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rcysjgrqjw .gt_column_spanner {
+#urlfdyvret .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2270,11 +2470,11 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   width: 100%;
 }
 
-#rcysjgrqjw .gt_spanner_row {
+#urlfdyvret .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rcysjgrqjw .gt_group_heading {
+#urlfdyvret .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2300,7 +2500,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   text-align: left;
 }
 
-#rcysjgrqjw .gt_empty_group_heading {
+#urlfdyvret .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2315,15 +2515,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   vertical-align: middle;
 }
 
-#rcysjgrqjw .gt_from_md > :first-child {
+#urlfdyvret .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rcysjgrqjw .gt_from_md > :last-child {
+#urlfdyvret .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rcysjgrqjw .gt_row {
+#urlfdyvret .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2342,7 +2542,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   overflow-x: hidden;
 }
 
-#rcysjgrqjw .gt_stub {
+#urlfdyvret .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2355,7 +2555,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#rcysjgrqjw .gt_stub_row_group {
+#urlfdyvret .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2369,15 +2569,15 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   vertical-align: top;
 }
 
-#rcysjgrqjw .gt_row_group_first td {
+#urlfdyvret .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rcysjgrqjw .gt_row_group_first th {
+#urlfdyvret .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rcysjgrqjw .gt_summary_row {
+#urlfdyvret .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2387,16 +2587,16 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#rcysjgrqjw .gt_first_summary_row {
+#urlfdyvret .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_first_summary_row.thick {
+#urlfdyvret .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rcysjgrqjw .gt_last_summary_row {
+#urlfdyvret .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2406,7 +2606,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_grand_summary_row {
+#urlfdyvret .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2416,7 +2616,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#rcysjgrqjw .gt_first_grand_summary_row {
+#urlfdyvret .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2426,7 +2626,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-top-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_last_grand_summary_row_top {
+#urlfdyvret .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2436,11 +2636,11 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_striped {
+#urlfdyvret .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rcysjgrqjw .gt_table_body {
+#urlfdyvret .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2449,7 +2649,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-bottom-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_footnotes {
+#urlfdyvret .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2463,7 +2663,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_footnote {
+#urlfdyvret .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2472,7 +2672,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#rcysjgrqjw .gt_sourcenotes {
+#urlfdyvret .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2486,7 +2686,7 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   border-right-color: #D3D3D3;
 }
 
-#rcysjgrqjw .gt_sourcenote {
+#urlfdyvret .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2494,76 +2694,77 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
   padding-right: 5px;
 }
 
-#rcysjgrqjw .gt_left {
+#urlfdyvret .gt_left {
   text-align: left;
 }
 
-#rcysjgrqjw .gt_center {
+#urlfdyvret .gt_center {
   text-align: center;
 }
 
-#rcysjgrqjw .gt_right {
+#urlfdyvret .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rcysjgrqjw .gt_font_normal {
+#urlfdyvret .gt_font_normal {
   font-weight: normal;
 }
 
-#rcysjgrqjw .gt_font_bold {
+#urlfdyvret .gt_font_bold {
   font-weight: bold;
 }
 
-#rcysjgrqjw .gt_font_italic {
+#urlfdyvret .gt_font_italic {
   font-style: italic;
 }
 
-#rcysjgrqjw .gt_super {
+#urlfdyvret .gt_super {
   font-size: 65%;
 }
 
-#rcysjgrqjw .gt_footnote_marks {
+#urlfdyvret .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rcysjgrqjw .gt_asterisk {
+#urlfdyvret .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rcysjgrqjw .gt_indent_1 {
+#urlfdyvret .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rcysjgrqjw .gt_indent_2 {
+#urlfdyvret .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rcysjgrqjw .gt_indent_3 {
+#urlfdyvret .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rcysjgrqjw .gt_indent_4 {
+#urlfdyvret .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rcysjgrqjw .gt_indent_5 {
+#urlfdyvret .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
-<th colspan="5" class="gt_heading gt_title gt_font_normal">Average Yearly SDs of Tech companies</th>
+<th colspan="6" class="gt_heading gt_title gt_font_normal">Average Yearly SDs of Tech companies</th>
 </tr>
 <tr class="odd gt_heading">
-<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">From 11 Mar, 2020 to 01 Mar, 2024</th>
+<th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">From 11 Mar, 2020 to 03 Mar, 2024</th>
 </tr>
 <tr class="header gt_col_headings">
+<th id="symbol" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">symbol</th>
 <th id="2020" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">2020</th>
 <th id="2021" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">2021</th>
 <th id="2022" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">2022</th>
@@ -2572,60 +2773,53 @@ Table&nbsp;3: Summary statistics of the log-returns for AAPL
 </tr>
 </thead>
 <tbody class="gt_table_body">
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="AAPL" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">AAPL</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="symbol">AAPL</td>
+<td class="gt_row gt_right" headers="2020" style="background-color: #FF0000; color: #FFFFFF">0.0283</td>
+<td class="gt_row gt_right" headers="2021">0.0158</td>
+<td class="gt_row gt_right" headers="2022" style="background-color: #FF0000; color: #FFFFFF">0.0224</td>
+<td class="gt_row gt_right" headers="2023">0.0128</td>
+<td class="gt_row gt_right" headers="2024">0.0119</td>
 </tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="AAPL  2020">0.0283</td>
-<td class="gt_row gt_right" headers="AAPL  2021">0.0158</td>
-<td class="gt_row gt_right" headers="AAPL  2022">0.0224</td>
-<td class="gt_row gt_right" headers="AAPL  2023">0.0128</td>
-<td class="gt_row gt_right" headers="AAPL  2024">0.0120</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="symbol">AMZN</td>
+<td class="gt_row gt_right" headers="2020" style="background-color: #FF0000; color: #FFFFFF">0.0237</td>
+<td class="gt_row gt_right" headers="2021">0.0152</td>
+<td class="gt_row gt_right" headers="2022" style="background-color: #FF0000; color: #FFFFFF">0.0316</td>
+<td class="gt_row gt_right" headers="2023" style="background-color: #FF0000; color: #FFFFFF">0.0207</td>
+<td class="gt_row gt_right" headers="2024">0.0182</td>
 </tr>
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="AMZN" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">AMZN</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="symbol">GOOG</td>
+<td class="gt_row gt_right" headers="2020" style="background-color: #FF0000; color: #FFFFFF">0.0234</td>
+<td class="gt_row gt_right" headers="2021">0.0149</td>
+<td class="gt_row gt_right" headers="2022" style="background-color: #FF0000; color: #FFFFFF">0.0244</td>
+<td class="gt_row gt_right" headers="2023">0.0193</td>
+<td class="gt_row gt_right" headers="2024">0.0182</td>
 </tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="AMZN  2020">0.0237</td>
-<td class="gt_row gt_right" headers="AMZN  2021">0.0152</td>
-<td class="gt_row gt_right" headers="AMZN  2022">0.0316</td>
-<td class="gt_row gt_right" headers="AMZN  2023">0.0207</td>
-<td class="gt_row gt_right" headers="AMZN  2024">0.0184</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="symbol">MSFT</td>
+<td class="gt_row gt_right" headers="2020" style="background-color: #FF0000; color: #FFFFFF">0.0268</td>
+<td class="gt_row gt_right" headers="2021">0.0132</td>
+<td class="gt_row gt_right" headers="2022" style="background-color: #FF0000; color: #FFFFFF">0.0223</td>
+<td class="gt_row gt_right" headers="2023">0.0157</td>
+<td class="gt_row gt_right" headers="2024">0.0114</td>
 </tr>
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="GOOG" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">GOOG</td>
-</tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="GOOG  2020">0.0234</td>
-<td class="gt_row gt_right" headers="GOOG  2021">0.0149</td>
-<td class="gt_row gt_right" headers="GOOG  2022">0.0244</td>
-<td class="gt_row gt_right" headers="GOOG  2023">0.0193</td>
-<td class="gt_row gt_right" headers="GOOG  2024">0.0184</td>
-</tr>
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="MSFT" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">MSFT</td>
-</tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="MSFT  2020">0.0268</td>
-<td class="gt_row gt_right" headers="MSFT  2021">0.0132</td>
-<td class="gt_row gt_right" headers="MSFT  2022">0.0223</td>
-<td class="gt_row gt_right" headers="MSFT  2023">0.0157</td>
-<td class="gt_row gt_right" headers="MSFT  2024">0.0115</td>
-</tr>
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="TSLA" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">TSLA</td>
-</tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="TSLA  2020">0.0538</td>
-<td class="gt_row gt_right" headers="TSLA  2021">0.0342</td>
-<td class="gt_row gt_right" headers="TSLA  2022">0.0423</td>
-<td class="gt_row gt_right" headers="TSLA  2023">0.0340</td>
-<td class="gt_row gt_right" headers="TSLA  2024">0.0297</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="symbol">TSLA</td>
+<td class="gt_row gt_right" headers="2020" style="background-color: #FF0000; color: #FFFFFF">0.0538</td>
+<td class="gt_row gt_right" headers="2021" style="background-color: #FF0000; color: #FFFFFF">0.0342</td>
+<td class="gt_row gt_right" headers="2022" style="background-color: #FF0000; color: #FFFFFF">0.0423</td>
+<td class="gt_row gt_right" headers="2023" style="background-color: #FF0000; color: #FFFFFF">0.0340</td>
+<td class="gt_row gt_right" headers="2024" style="background-color: #FF0000; color: #FFFFFF">0.0294</td>
 </tr>
 </tbody>
 </table>
 
 </div>
+</div>
+</div>
+</figure>
 </div>
 </div>
 </section>
