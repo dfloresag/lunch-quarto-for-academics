@@ -11,6 +11,7 @@ format:
   revealjs:
     transition: slide
     background-transition: fade
+    scrollable: true 
     logo: https://raw.githubusercontent.com/epfl-exts/exts-quarto-revealjs/main/logos/Extension-school-logo-2023-positif.png
     footer: "R-lunch"
     css: https://github.com/epfl-exts/exts-quarto-revealjs/blob/main/themes/theme.scss
@@ -65,7 +66,7 @@ colorexts <- list(
 
 -   ... **multi-language** and
 
--   ... **multi-platfor publishing system.**
+-   ... **multi-platform publishing system.**
 :::
 
 ## Multi-language
@@ -226,22 +227,34 @@ Plot.plot({
 
 # Quarto in Academia
 
-## (Hey! It's the title of the presentation)
+## Yes! It's the title of the presentation!
 
-With quarto, we can take deal with many of the academic tasks
+Quarto offers a a world of possibilities for communicating:
 
 ::: fragment
 -   as a tool for **Presentation**
 
-    -   build engaging **courses** ...
+    -   build engaging **courses...**
 
     -   ... and academic **talks**
 :::
 
 ::: fragment
--   as a tool for **typesetting** we can...
+-   as a tool for **Typesetting** we can...
 
-    -   ... deploy **educational content** with ease in different **formats**
+    -   ... deploy **educational content** in various **formats**
 
-    -   ... write **articles** with convenience, taking advantage of **journal templates**
+    -   ... write **articles** with using **journal templates**
+:::
+
+## Time for a demo! {background-image="img/pic-code.png"}
+
+::: fragment
+### `r fontawesome::fa("github")` Github Repo
+
+-   <https://github.com/dfloresag/lunch-quarto-for-academics>
+
+-   We will be modifying the file `examples/1-report.qmd`
+
+-   It contains **course notes** with an example of a **data analysis**
 :::

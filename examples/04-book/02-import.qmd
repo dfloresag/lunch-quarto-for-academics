@@ -1,0 +1,89 @@
+```{r, include = FALSE}
+#| message: false
+#| warning: false
+library(tidyverse)
+library(tidyquant)
+library(lubridate)
+library(knitr)
+library(gt)
+```
+
+# Importing the data
+
+-   We've imported the data using the package `{tidyquant}`.
+
+```{r data-importation}
+
+get_what <- "stock.prices"
+companies <- c("AAPL",
+             "MSFT",
+             "GOOG",
+             "AMZN",
+             "TSLA")
+
+stocks_data <- 
+  companies |> 
+  map(tq_get, get = get_what) |> 
+  bind_rows()
+```
+
+-   The dataset contains the information on stocks for 6 companies: Apple Inc. **(AAPL)**, Microsoft Corporation **(MSFT)** , Alphabet Inc. **(GOOG)**, Amazon Inc. **(AMZN)** and Tesla Inc. **(TSLA).**
+
+```{r}
+#| label: tbl-data
+#| tbl-cap: "The first six lines of the whole dataset"
+
+stocks_data |> 
+  slice_head(n=6) |> 
+  kable()
+```
+
+# Tidying the data
+
+::: panel-tabset
+## Choosing a Company
+
+-   A ticker can be stored in the variable `company_ticker`.
+
+-   Later, this will help us *parametrise* our report
+
+```{r}
+company_ticker <- "AAPL"
+```
+
+## Choosing a Timeframe
+
+-   To narrow our focus, we restrain our analysis to a given timeframe.
+
+-   We will focus on the performance of these stocks since the beginning of the COVID-19 pandemic (March 11 2020) until now.
+
+-   The `start_date` variable can store this information.
+
+```{r}
+start_date <-  ymd("2020-03-11")
+```
+
+## Filtering the data
+
+-   We're interested in the company APPLE INC, we can use the ticker `r company_ticker`
+
+-   We'll use the `filter()` to subset the data for the company in the given timeframe.
+
+```{r}
+company_data <- 
+  stocks_data |> 
+  filter(symbol == company_ticker, 
+         date > start_date) 
+```
+
+-   We can explore the data by printing its first 6 lines:
+
+```{r}
+#| label: tbl-clean-data
+#| tbl-cap: "The first six lines of the apple dataset"
+
+head(company_data) |> 
+  kable()
+```
+:::
+

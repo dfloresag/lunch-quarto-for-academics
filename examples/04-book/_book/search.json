@@ -1,0 +1,132 @@
+[
+  {
+    "objectID": "04-multiple-companies.html",
+    "href": "04-multiple-companies.html",
+    "title": "4  Analyzing multiple companies",
+    "section": "",
+    "text": "4.1 Plotting the stock price\nreturns_data |&gt; \n  ggplot(aes(x = date, y = close,  group = symbol, color = symbol))+\n  geom_line(alpha=0.5)+\n  labs(\n    title = str_glue(\"Daily price for {glue::glue_collapse(company_tickers, sep = ', ')}\"), \n    subtitle = str_glue(\"Close stock prices since {start_date |&gt; format('%d %B, %Y')}\"),\n    x = \"Date\",\n    y = \"Close Price\"\n    ) + \n  theme_minimal()+\n  scale_color_manual(values = company_colors)\n\n\n\n\n\n\n\nFigure 4.1: Stocks prices for all companies in the selected period",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Analyzing multiple companies</span>"
+    ]
+  },
+  {
+    "objectID": "04-multiple-companies.html#plotting-the-stock-price",
+    "href": "04-multiple-companies.html#plotting-the-stock-price",
+    "title": "4  Analyzing multiple companies",
+    "section": "",
+    "text": "Let’s plot the whole\n\n\n\nA single chart is not very satisfactory, even if we try to make differentiate companies with colors.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Analyzing multiple companies</span>"
+    ]
+  },
+  {
+    "objectID": "04-multiple-companies.html#visualising-the-log-returns",
+    "href": "04-multiple-companies.html#visualising-the-log-returns",
+    "title": "4  Analyzing multiple companies",
+    "section": "4.2 Visualising the log-returns",
+    "text": "4.2 Visualising the log-returns\n\nAs the interest is in the log-returns, let’s plot the returns in a single frame\n\n\nreturns_data |&gt; \n  ggplot(aes(x = date, y = daily_log_returns,  group = symbol, color = symbol))+\n  geom_line(alpha = 0.5) +\n  labs(\n    title = str_glue(\"Daily Returns of the stock for all companies\"), \n    subtitle = str_glue(\"Close stock prices since {start_date |&gt; format('%d %B, %Y')}\"),\n    x = \"Date\",\n    y = \"Returns\"\n    ) + \n  theme_minimal()+\n  theme(legend.position = \"none\")+ \n  scale_color_manual(values = company_colors)\n\nWarning: Removed 5 rows containing missing values or values outside the scale range\n(`geom_line()`).\n\n\n\n\n\n\n\n\nFigure 4.2: Log returns of all companies\n\n\n\n\n\n\n\n\n\n\n\nCreate a faceted chart\n\n\n\n\nThere’s a problem here, as you can see. The log-returns are confounded and become difficult to distinguish in spite of the use of relevant colors!",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Analyzing multiple companies</span>"
+    ]
+  },
+  {
+    "objectID": "04-multiple-companies.html#creating-a-faceted-chart",
+    "href": "04-multiple-companies.html#creating-a-faceted-chart",
+    "title": "4  Analyzing multiple companies",
+    "section": "4.3 Creating a faceted chart",
+    "text": "4.3 Creating a faceted chart\n\nTo distinguish better, we can use the function facet_wrap() .\nThis creates a _mini_ plot according to a variable\n\n\nreturns_data |&gt; \n  ggplot(aes(x = date, y = daily_log_returns,  group = symbol, color = symbol))+\n  geom_line(alpha = 0.5) +\n  labs(\n    title = str_glue(\"Daily Returns of the stock for all companies\"), \n    subtitle = str_glue(\"Close stock prices since {start_date |&gt; format('%d %B, %Y')}\"),\n    x = \"Date\",\n    y = \"Returns\"\n    ) + \n  theme_minimal()+\n1  facet_grid(rows = vars(symbol)) +\n  theme(legend.position = \"none\")+ \n  scale_color_manual(values = company_colors)\n\n\n1\n\nOn this line we added the faceted chart\n\n\n\n\n\n\n\n\n\n\nFigure 4.3: Log returns of all companies - faceted\n\n\n\n\n\n\n\n\n\n\n\nWhat can we see?\n\n\n\n\n\n\nUncertainties in the supply chains produced by the international crises seem to have affected companies in the same way\nHowever the magnitude of these impacts seems to have been different across companies, e.g.\n\nTSLA shows significantly more risk",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Analyzing multiple companies</span>"
+    ]
+  },
+  {
+    "objectID": "04-multiple-companies.html#average-returns-for-all-companies",
+    "href": "04-multiple-companies.html#average-returns-for-all-companies",
+    "title": "4  Analyzing multiple companies",
+    "section": "4.4 Average Returns for all companies",
+    "text": "4.4 Average Returns for all companies\n\nmean_and_sd &lt;- \n  returns_data |&gt; \n  mutate(year = year(date)) |&gt; \n  group_by(symbol, year) |&gt; \n  summarise(\n    average_return = mean(daily_log_returns, na.rm = TRUE), \n    sd_return = sd(daily_log_returns, na.rm = TRUE)\n    ) |&gt; \n  ungroup()\n\n`summarise()` has grouped output by 'symbol'. You can override using the\n`.groups` argument.\n\nmean_and_sd |&gt; \n  select(-sd_return) |&gt; \n  pivot_wider(names_from = year,values_from = average_return) |&gt; \n  gt() |&gt; \n  tab_header(\n    title= \"Average Yearly returns of Tech companies\",\n    subtitle  = str_glue(\"From {start_date |&gt; format('%d %b, %Y')} to {Sys.Date() |&gt; format('%d %b, %Y')}\")) |&gt; \n  fmt_number(columns = -symbol, decimals  = 4) |&gt; \n  tab_style(\n    style = list(\n      cell_fill(color = \"lightgreen\"), \n      cell_text(color = \"white\")), \n    locations = list(\n      cells_body(columns =`2020`, \n                 rows= `2020`&gt;0 ), \n      cells_body(columns =`2021`, \n                 rows= `2021`&gt;0 ), \n       cells_body(columns =`2022`, \n                 rows= `2022`&gt;0 ), \n       cells_body(columns =`2022`, \n                 rows= `2022`&gt;0 ), \n       cells_body(columns =`2023`, \n                 rows= `2023`&gt;0 ), \n      cells_body(columns =`2024`, \n                 rows= `2024`&gt;0 )\n    )\n  ) |&gt; \n  tab_style(\n    style = list(\n      cell_fill(color = \"red\"), \n      cell_text(color = \"white\")), \n        locations = list(\n      cells_body(columns =`2020`, \n                 rows= `2020`&lt;=0 ), \n      cells_body(columns =`2021`, \n                 rows= `2021`&lt;=0 ), \n       cells_body(columns =`2022`, \n                 rows= `2022`&lt;=0 ), \n       cells_body(columns =`2022`, \n                 rows= `2022`&lt;= 0 ), \n       cells_body(columns =`2023`, \n                 rows= `2023`&lt;=0 ), \n      cells_body(columns =`2024`, \n                 rows= `2024`&lt;=0 )\n    )\n  )\n\n\n\nTable 4.1: Average Returns for all companies\n\n\n\n\n\n\n\n\n\nAverage Yearly returns of Tech companies\n\n\nFrom 11 Mar, 2020 to 05 Mar, 2024\n\n\nsymbol\n2020\n2021\n2022\n2023\n2024\n\n\n\n\nAAPL\n0.0037\n0.0012\n−0.0012\n0.0016\n−0.0022\n\n\nAMZN\n0.0033\n0.0001\n−0.0027\n0.0024\n0.0036\n\n\nGOOG\n0.0022\n0.0020\n−0.0019\n0.0019\n−0.0011\n\n\nMSFT\n0.0023\n0.0016\n−0.0013\n0.0018\n0.0023\n\n\nTSLA\n0.0090\n0.0016\n−0.0042\n0.0028\n−0.0065",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Analyzing multiple companies</span>"
+    ]
+  },
+  {
+    "objectID": "04-multiple-companies.html#risk-sd-all-companies",
+    "href": "04-multiple-companies.html#risk-sd-all-companies",
+    "title": "4  Analyzing multiple companies",
+    "section": "4.5 Risk (SD) all companies",
+    "text": "4.5 Risk (SD) all companies\n\nmean_and_sd |&gt; \n  select(-average_return) |&gt; \n  pivot_wider(names_from = year,values_from = sd_return) |&gt; \n  gt() |&gt; \n  tab_header(\n    title= \"Average Yearly SDs of Tech companies\",\n    subtitle  = str_glue(\"From {start_date |&gt; format('%d %b, %Y')} to {Sys.Date() |&gt; format('%d %b, %Y')}\")) |&gt; \n  fmt_number(columns = -symbol, decimals  = 4) |&gt; \n  tab_style(\n    style = list(\n      cell_fill(color = \"red\"), \n      cell_text(color = \"white\")), \n        locations = list(\n      cells_body(columns =`2020`, \n                 rows= `2020`&gt;=0.020), \n      cells_body(columns =`2021`, \n                 rows= `2021`&gt;=0.020 ), \n       cells_body(columns =`2022`, \n                 rows= `2022`&gt;=0.020  ), \n       cells_body(columns =`2022`, \n                 rows= `2022`&gt;=0.020  ), \n       cells_body(columns =`2023`, \n                 rows= `2023`&gt;=0.020  ), \n      cells_body(columns =`2024`, \n                 rows= `2024`&gt;=0.020)\n    )\n  )\n\n\n\nTable 4.2: Risk (SD) all companies in the period\n\n\n\n\n\n\n\n\n\nAverage Yearly SDs of Tech companies\n\n\nFrom 11 Mar, 2020 to 05 Mar, 2024\n\n\nsymbol\n2020\n2021\n2022\n2023\n2024\n\n\n\n\nAAPL\n0.0283\n0.0158\n0.0224\n0.0128\n0.0123\n\n\nAMZN\n0.0237\n0.0152\n0.0316\n0.0207\n0.0180\n\n\nGOOG\n0.0234\n0.0149\n0.0244\n0.0193\n0.0185\n\n\nMSFT\n0.0268\n0.0132\n0.0223\n0.0157\n0.0113\n\n\nTSLA\n0.0538\n0.0342\n0.0423\n0.0340\n0.0309",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Analyzing multiple companies</span>"
+    ]
+  },
+  {
+    "objectID": "03-understanding.html",
+    "href": "03-understanding.html",
+    "title": "3  Understanding the data",
+    "section": "",
+    "text": "3.1 Visualise\ncompany_data |&gt; \n  ggplot(aes(x = date))+\n  geom_line(aes(y = close))",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Understanding the data</span>"
+    ]
+  },
+  {
+    "objectID": "03-understanding.html#visualise",
+    "href": "03-understanding.html#visualise",
+    "title": "3  Understanding the data",
+    "section": "",
+    "text": "With this data and the functions in ggplot(), we can create a first visualisation of the closing stock price (close).\nWe set the dates on the x axis and the close price in the y axis.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Understanding the data</span>"
+    ]
+  },
+  {
+    "objectID": "03-understanding.html#transform",
+    "href": "03-understanding.html#transform",
+    "title": "3  Understanding the data",
+    "section": "3.2 Transform",
+    "text": "3.2 Transform\n\nThe visualisation offers a first glance. We can transform again to ask the questions on the returns.\nRemember that the difference in log-price are approximations of the returns, i.e. the percentage gain after selling the stock.\n\n\nDefinition 3.1 Let \\(p_t\\) denote the closing price of the stock, the log-return \\(r_t\\) can be defined as: \\[\nr_t = \\log(p_t) - \\log(p_{t-1}) \\approx \\frac{p_t - p_{t-1}}{p_{t-1}}\n\\tag{3.1}\\]\n\n\nWe use the function mutate(), alongside lag() to create a column with the daily (log) returns and the definition in equation Definition 3.1\n\n\ncompany_data &lt;- company_data |&gt; \n  mutate(daily_log_returns = log(close)-log(lag(close)))",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Understanding the data</span>"
+    ]
+  },
+  {
+    "objectID": "03-understanding.html#visualize-again-log-returns",
+    "href": "03-understanding.html#visualize-again-log-returns",
+    "title": "3  Understanding the data",
+    "section": "3.3 Visualize again: log-returns",
+    "text": "3.3 Visualize again: log-returns\nWe can construct a visualisation with this. Additionally, we can add layers to our visualisation to decorate it at will.\n\ncompany_data |&gt; \n  ggplot(aes(x = date))+\n  geom_line(aes(y = daily_log_returns), alpha = 0.5, color = \"#555555\") +\n  geom_hline(yintercept = 0, lty = 3)+\n  labs(\n    title = str_glue(\"Daily Returns of the stock for {company_ticker}\"), \n    subtitle = str_glue(\"Close stock prices since {start_date |&gt; format('%d %B, %Y')}\"),\n    x = \"Date\",\n    y = \"Returns\"\n    ) + \n  theme_minimal()\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_line()`).\n\n\n\n\n\n\n\n\nFigure 3.1: Log-returns for AAPL\n\n\n\n\n\n\n\n\n\n\n\nLook at the years!\n\n\n\nWhat can you say about this plot?\n\nIt appears that there is a high variability of the log-returns in the year 2020\nThis increase in variance seems to stabilise in 2021 and reappear in 2022\nThe year 2023 is also quite stable\n\nAll these point to signs of increased variability in times of global crises, which have added elements of uncertainty to the global supply chain.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Understanding the data</span>"
+    ]
+  },
+  {
+    "objectID": "03-understanding.html#model-create-summary-statistics",
+    "href": "03-understanding.html#model-create-summary-statistics",
+    "title": "3  Understanding the data",
+    "section": "3.4 Model: Create summary statistics",
+    "text": "3.4 Model: Create summary statistics\n\nWe can obtain a summary table for some summary statistics with summarise().\nWe will compute the average return \\(\\bar{r}\\) and estimate the standard deviation (SD) of the log-returns \\(\\hat{\\sigma}\\)\n\n\nDefinition 3.2 These statistics are defined as follows:\n\\[\\begin{align}\n  \\bar{r} &= \\frac{1}{T}\\sum_{t=1}^T r_t\\\\\n  \\hat{\\sigma}  &= \\sqrt{\\frac{1}{T-1}\\sum_{t=1}^T \\left(r_t - \\bar{r}\\right)^2}\n\\end{align}\\]\n\n\n\n\n\n\n\nA word of warning\n\n\n\nWhile the average return might not mean much in theoretical terms, the standard deviation might give some idea of the risk or volatility.\n\n\n\nWe can show the values in the following table:\n\n\ncompany_data |&gt; \n  summarise(`Average Return` = mean(daily_log_returns, na.rm = TRUE), \n            `Average Risk (SD)` = sd(daily_log_returns, na.rm = TRUE)) |&gt; \n  gt() |&gt; \n  tab_header(\n    title= \"Summary statistics of Tech companies stocks\",\n    subtitle  = str_glue(\"From {start_date |&gt; format('%d %b, %Y')} to {Sys.Date() |&gt; format('%d %b, %Y')}\")) |&gt; \n  fmt_number(decimals  = 4)\n\n\n\nTable 3.1: Summary statistics of the log-returns for AAPL\n\n\n\n\n\n\n\n\n\nSummary statistics of Tech companies stocks\n\n\nFrom 11 Mar, 2020 to 05 Mar, 2024\n\n\nAverage Return\nAverage Risk (SD)\n\n\n\n\n0.0010\n0.0200\n\n\n\n\n\n\n\n\n\n\n\n3.4.1 Summary statistics by year\nAnd, seeing that the visualisation shows periods of high volatility in the year 2020, we can compute yearly measures of risk and volatility:\n\ncompany_data |&gt; \n  mutate(year = year(date)) |&gt; \n  group_by(year) |&gt; \n  summarise(`Average Return` = mean(daily_log_returns, na.rm = TRUE), \n            `Risk (SD)` = sd(daily_log_returns, na.rm = TRUE)) |&gt; \n  gt() |&gt; \n  tab_header(\n    title= \"Summary statistics of Tech companies stocks\",\n    subtitle  = str_glue(\"From {start_date |&gt; format('%d %b, %Y')} to {Sys.Date() |&gt; format('%d %b, %Y')}\")) |&gt; \n  fmt_number(columns = -year, decimals  = 4) |&gt; \n  tab_style(\n    style = list(\n      cell_fill(color = \"lightgreen\"), \n      cell_text(color = \"white\")), \n    locations = \n      cells_body(columns = `Average Return`, \n                 rows= `Average Return` &gt;0)\n  ) |&gt; \n  tab_style(\n    style = list(\n      cell_fill(color = \"red\"), \n      cell_text(color = \"white\")), \n    locations = \n      cells_body(columns = `Risk (SD)`, \n                 rows= `Risk (SD)` &gt;0.020)\n  )\n\n\n\n\n\n\n\nSummary statistics of Tech companies stocks\n\n\nFrom 11 Mar, 2020 to 05 Mar, 2024\n\n\nyear\nAverage Return\nRisk (SD)\n\n\n\n\n2020\n0.0037\n0.0283\n\n\n2021\n0.0012\n0.0158\n\n\n2022\n−0.0012\n0.0224\n\n\n2023\n0.0016\n0.0128\n\n\n2024\n−0.0022\n0.0123\n\n\n\n\n\n\n\n\n\n\n\n\n\nLook at the years (again)!\n\n\n\nWe’re highlighting the years where the risk is higher. These numbers reflect the remarks we’ve made in the previous points, namely that global uncertainties have affected the risk of this stock.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Understanding the data</span>"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "In this lesson we will explore how to carry the steps of the Data Science pipeline to produce an analysis\n\nTo illustrate, we will study the stocks of five tech companies\n\nFirst we’ll focus on a single company\nThen we’ll see how all these companies have fared over time.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>{tidyverse} packages:</span>"
+    ]
+  },
+  {
+    "objectID": "02-import.html",
+    "href": "02-import.html",
+    "title": "2  Importing the data",
+    "section": "",
+    "text": "We’ve imported the data using the package {tidyquant}.\n\n\nget_what &lt;- \"stock.prices\"\ncompanies &lt;- c(\"AAPL\",\n             \"MSFT\",\n             \"GOOG\",\n             \"AMZN\",\n             \"TSLA\")\n\nstocks_data &lt;- \n  companies |&gt; \n  map(tq_get, get = get_what) |&gt; \n  bind_rows()\n\n\nThe dataset contains the information on stocks for 6 companies: Apple Inc. (AAPL), Microsoft Corporation (MSFT) , Alphabet Inc. (GOOG), Amazon Inc. (AMZN) and Tesla Inc. (TSLA).\n\n\nstocks_data |&gt; \n  slice_head(n=6) |&gt; \n  kable()\n\n\n\nTable 2.1: The first six lines of the whole dataset\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsymbol\ndate\nopen\nhigh\nlow\nclose\nvolume\nadjusted\n\n\n\n\nAAPL\n2014-01-02\n19.84571\n19.89393\n19.71500\n19.75464\n234684800\n17.29666\n\n\nAAPL\n2014-01-03\n19.74500\n19.77500\n19.30107\n19.32071\n392467600\n16.91672\n\n\nAAPL\n2014-01-06\n19.19464\n19.52857\n19.05714\n19.42607\n412610800\n17.00897\n\n\nAAPL\n2014-01-07\n19.44000\n19.49857\n19.21143\n19.28714\n317209200\n16.88733\n\n\nAAPL\n2014-01-08\n19.24321\n19.48429\n19.23893\n19.40929\n258529600\n16.99428\n\n\nAAPL\n2014-01-09\n19.52857\n19.53071\n19.11964\n19.16143\n279148800\n16.77725\n\n\n\n\n\n\n\n\n\n3 Tidying the data\n\nChoosing a CompanyChoosing a TimeframeFiltering the data\n\n\n\nA ticker can be stored in the variable company_ticker.\nLater, this will help us parametrise our report\n\n\ncompany_ticker &lt;- \"AAPL\"\n\n\n\n\nTo narrow our focus, we restrain our analysis to a given timeframe.\nWe will focus on the performance of these stocks since the beginning of the COVID-19 pandemic (March 11 2020) until now.\nThe start_date variable can store this information.\n\n\nstart_date &lt;-  ymd(\"2020-03-11\")\n\n\n\n\nWe’re interested in the company APPLE INC, we can use the ticker AAPL\nWe’ll use the filter() to subset the data for the company in the given timeframe.\n\n\ncompany_data &lt;- \n  stocks_data |&gt; \n  filter(symbol == company_ticker, \n         date &gt; start_date) \n\n\nWe can explore the data by printing its first 6 lines:\n\n\nhead(company_data) |&gt; \n  kable()\n\n\n\nTable 3.1: The first six lines of the apple dataset\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsymbol\ndate\nopen\nhigh\nlow\nclose\nvolume\nadjusted\n\n\n\n\nAAPL\n2020-03-12\n63.9850\n67.5000\n62.0000\n62.0575\n418474000\n60.52466\n\n\nAAPL\n2020-03-13\n66.2225\n69.9800\n63.2375\n69.4925\n370732000\n67.77601\n\n\nAAPL\n2020-03-16\n60.4875\n64.7700\n60.0000\n60.5525\n322423600\n59.05684\n\n\nAAPL\n2020-03-17\n61.8775\n64.4025\n59.6000\n63.2150\n324056000\n61.65357\n\n\nAAPL\n2020-03-18\n59.9425\n62.5000\n59.2800\n61.6675\n300233600\n60.14428\n\n\nAAPL\n2020-03-19\n61.8475\n63.2100\n60.6525\n61.1950\n271857200\n59.68346",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Importing the data</span>"
+    ]
+  }
+]

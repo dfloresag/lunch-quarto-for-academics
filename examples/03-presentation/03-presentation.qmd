@@ -1,0 +1,26 @@
+---
+title: "The Data Science Pipeline"
+author: "EPFL Extension School"
+subtitle: An illustration of the Data Science Pipeline with R and Rmarkdown
+format: 
+  revealjs:
+    title-slide-attributes: 
+      data-background-image: "https://raw.githubusercontent.com/epfl-exts/exts-quarto-revealjs/main/logos/Extension-school-logo-2023-positif.png"
+      data-background-position: "25px 25px"
+      data-background-size: "200px" 
+      data-background-color: "#FFFFFF"
+    background-transition: fade
+    transition: slide
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    scrollable: true 
+    logo: https://raw.githubusercontent.com/epfl-exts/exts-quarto-revealjs/main/logos/Extension-school-logo-2023-positif.png
+    footer: "R-lunch"
+    css: https://github.com/epfl-exts/exts-quarto-revealjs/blob/main/themes/theme.scss
+    editor: visual
+---
+
+  
+{{< include _content.qmd >}}
+

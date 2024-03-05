@@ -1,0 +1,20 @@
+project:
+  type: "book"
+
+book:
+  title: "The Data Science Pipeline"
+  chapters:
+    - index.qmd
+    - 02-import.qmd
+    - 03-understanding.qmd
+    - 04-multiple-companies.qmd
+
+format:
+  html:
+    theme: cosmo
+    code-line-numbers: true
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+

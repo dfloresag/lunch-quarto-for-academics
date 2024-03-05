@@ -1,0 +1,251 @@
+---
+title: "Return Analysis"
+subtitle: "An illustration of the Data Pipeline with R and Rmarkdown"
+author: "EPFL Extension School"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, include=FALSE}
+# {readxl} to import data
+library(readxl)
+
+# {dplyr} and {tidyr} to clean and tidy data
+library(dplyr) 
+library(tidyr)
+
+# {ggplot2} to visualise data
+library(ggplot2)
+
+# specialised packages:
+
+library(stringr)   # string manipulation
+library(lubridate) # time manipulation
+library(tsibble)
+```
+
+# Single company analysis
+
+## First steps
+
+We will start with an analysis of a single company. Below, we see have a list of company tickers for some of the top tech companies. A ticker can be stored in the variable `company_ticker`.
+
+```{r}
+company_ticker <- "AAPL"
+# company_ticker <- "MSFT"
+# company_ticker <- "GOOG"
+# company_ticker <- "AMZN"
+# company_ticker <- "TSLA"
+```
+
+To narrow our focus, we could try to restrain our analysis to a given timeframe. For instance, we could focus on studying the performance of these stocks from the beginning of the pandemic (March 11 2020) until now. The `start_date` variable can store this information.
+
+```{r}
+start_date <-  ymd("2020-03-11")
+```
+
+## Importing the data
+
+The data is stored in an Excel (`.xlsx`) sheet. We can use `read_xlsx()` from `{readxl}` to import it
+
+```{r}
+company_data <- 
+  read_xlsx("data/stocks_data.xlsx", sheet = company_ticker) 
+company_data
+```
+
+We can explore the data by printing its first 6 lines:
+
+```{r}
+head(company_data)
+```
+
+## Understanding the data
+
+### Tidying and transforming
+
+Since we are interested in the performance of the stock from the beginning of the pandemic, we can use the function `filter()` from `{dplyr}`.
+
+```{r}
+company_data <- 
+  company_data %>% 
+  filter(date > start_date) 
+
+company_data
+```
+
+### Visualising the data
+
+With this data and the functions in `ggplot()`, we can create a first visualisation of the closing stock price. We set the dates on the `x` axis and the `close` price in the `y` axis.
+
+```{r}
+company_data %>% 
+  ggplot(aes(x = date))+
+  geom_line(aes(y = close)) 
+```
+
+### The loop of Understanding:
+
+The visualisation offers a first glance We can transform again to ask the questions on the returns. We use the function `mutate()`, alongside `lag(0` to create a column with the daily (log) returns.
+
+```{r}
+company_data <- company_data %>% 
+  mutate(daily_log_returns = log(close)-log(lag(close)))
+```
+
+We can construct a visualisation with this. Additionally, we can add layers to our visualisation to decorate it at will.
+
+```{r}
+company_data %>% 
+  ggplot(aes(x = date))+
+  geom_line(aes(y = daily_log_returns), alpha = 0.5, color = "#555555") +
+  geom_hline(yintercept = 0, lty = 3)+
+  labs(
+    title = str_glue("Daily Returns of the stock for {company_ticker}"), 
+    subtitle = str_glue("Close stock prices since {start_date %>% format('%d %B, %Y')}"),
+    x = "Date",
+    y = "Returns"
+    ) + 
+  theme_minimal()
+
+```
+
+We can obtain a summary table for some summary statistics with `summarise()`
+
+```{r}
+company_data %>% 
+  summarise(`Average Return` = mean(daily_log_returns, na.rm = TRUE), 
+            `Average Risk (SD)` = sd(daily_log_returns, na.rm = TRUE))
+```
+
+And, seeing that the visualisation shows periods of high volatility in the year 2020, we can compute yearly measures of risk and volatility:
+
+```{r}
+company_data %>% 
+  mutate(year = year(date)) %>% 
+  group_by(year) %>% 
+  summarise(`Average Return` = mean(daily_log_returns, na.rm = TRUE), 
+            `Average Risk (SD)` = sd(daily_log_returns, na.rm = TRUE))
+
+```
+
+Ok we see that:
+
+-   Now things are more stable and **less uncertain**
+
+# Analysis for multiple companies
+
+```{r}
+company_tickers <- c(
+  "AAPL", "MSFT", "GOOG", "AMZN", "TSLA") 
+company_names <- c(
+  "Apple", "Microsoft", "Alphabet (Google)", "Amazon", "Tesla")
+company_colors <-  c("AAPL" = "#555555", 
+             "MSFT" = "#7FBA00", 
+             "GOOG" ="#4285F4" , 
+             "AMZN" = "#FF9900",
+             "TSLA" = "#cc0000"
+             )
+```
+
+# Reading multiple data
+
+```{r}
+read_sheet <- function(sheet){
+  read_xlsx(
+    path = "data/stocks_data.xlsx", 
+    sheet = sheet)
+}
+
+library(purrr)
+
+returns_data <- 
+  company_tickers %>% 
+  map(read_sheet) %>% 
+  bind_rows() %>%
+  filter(date > start_date) %>% 
+  select(symbol,date, close) %>% 
+  group_by(symbol) %>% 
+  mutate(daily_log_returns = log(close) - log(lag(close))) %>% 
+  ungroup() 
+
+```
+
+## Plotting the stock price
+
+A single chart is not very satisfactory, even if we try to make differentiate companies with colors.
+
+```{r}
+returns_data %>% 
+  ggplot(aes(x = date, y = close,  group = symbol, color = symbol))+
+  geom_line(alpha=0.5)+
+  labs(
+    title = str_glue("Daily price for {glue::glue_collapse(company_tickers, sep = ', ')}"), 
+    subtitle = str_glue("Close stock prices since {start_date %>% format('%d %B, %Y')}"),
+    x = "Date",
+    y = "Close Price"
+    ) + 
+  theme_minimal()+
+  scale_color_manual(values = company_colors)
+```
+
+Here I write my insight
+
+```{r}
+returns_data %>% 
+  ggplot(aes(x = date, y = daily_log_returns,  group = symbol, color = symbol))+
+  geom_line(alpha = 0.5) +
+  labs(
+    title = str_glue("Daily Returns of the stock for {glue::glue_collapse(company_tickers, sep = ', ')}"), 
+    subtitle = str_glue("Close stock prices since {start_date %>% format('%d %B, %Y')}"),
+    x = "Date",
+    y = "Returns"
+    ) + 
+  theme_minimal()+
+  # theme(legend.position = "none")+ 
+  scale_color_manual(values = company_colors)
+```
+
+```{r}
+returns_data %>% 
+  ggplot(aes(x = date, y = daily_log_returns,  group = symbol, color = symbol))+
+  geom_line(alpha = 0.5) +
+  labs(
+    title = str_glue("Daily Returns of the stock for {glue::glue_collapse(company_tickers, sep = ', ')}"), 
+    subtitle = str_glue("Close stock prices since {start_date %>% format('%d %B, %Y')}"),
+    x = "Date",
+    y = "Returns"
+    ) + 
+  theme_minimal()+
+  facet_grid(rows = vars(symbol))+
+  theme(legend.position = "none")+
+  scale_color_manual(values = company_colors)
+```
+
+```{r}
+mean_and_sd <- 
+  returns_data %>% 
+  mutate(year = year(date)) %>% 
+  group_by(symbol, year) %>% 
+  summarise(
+    average_return = mean(daily_log_returns, na.rm = TRUE), 
+    sd_return = sd(daily_log_returns, na.rm = TRUE)
+    )
+```
+
+```{r}
+mean_and_sd %>% 
+  select(-sd_return) %>% 
+  pivot_wider(names_from = year,values_from = average_return)
+```
+
+```{r}
+mean_and_sd %>% 
+  select(-average_return) %>% 
+  pivot_wider(names_from = year,values_from = sd_return) 
+```
+
+This conclusion we can write here...

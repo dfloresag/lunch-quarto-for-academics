@@ -1,0 +1,177 @@
+```{r, include = FALSE}
+#| message: false
+#| warning: false
+library(tidyverse)
+library(tidyquant)
+library(lubridate)
+library(knitr)
+library(gt)
+get_what <- "stock.prices"
+companies <- c("AAPL",
+             "MSFT",
+             "GOOG",
+             "AMZN",
+             "TSLA")
+
+stocks_data <- 
+  companies |> 
+  map(tq_get, get = get_what) |> 
+  bind_rows()
+
+company_ticker <- "AAPL"
+start_date <-  ymd("2020-03-11")
+
+company_data <- 
+  stocks_data |> 
+  filter(symbol == company_ticker, 
+         date > start_date) 
+```
+
+# Understanding the data
+
+## Visualise
+
+-   With this data and the functions in `ggplot()`, we can create a first visualisation of the closing stock price (`close`).
+
+-   We set the dates on the `x` axis and the `close` price in the `y` axis.
+
+```{r}
+company_data |> 
+  ggplot(aes(x = date))+
+  geom_line(aes(y = close)) 
+```
+
+## Transform
+
+-   The visualisation offers a first glance. We can transform again to ask the questions on the returns.
+
+-   Remember that the difference in log-price are approximations of the returns, i.e. the **percentage gain after selling the stock**.
+
+::: {#def-log-returns}
+Let $p_t$ denote the closing price of the stock, the log-return $r_t$ can be defined as: $$
+r_t = \log(p_t) - \log(p_{t-1}) \approx \frac{p_t - p_{t-1}}{p_{t-1}}
+$$ {#eq-return-definition}
+:::
+
+-   We use the function `mutate()`, alongside `lag()` to create a column with the daily (log) returns and the definition in equation @def-log-returns
+
+```{r}
+company_data <- company_data |> 
+  mutate(daily_log_returns = log(close)-log(lag(close)))
+```
+
+## Visualize again: log-returns
+
+We can construct a visualisation with this. Additionally, we can add layers to our visualisation to decorate it at will.
+
+```{r}
+#| label: fig-log-returns-aapl
+#| fig-cap: "Log-returns for AAPL"
+
+company_data |> 
+  ggplot(aes(x = date))+
+  geom_line(aes(y = daily_log_returns), alpha = 0.5, color = "#555555") +
+  geom_hline(yintercept = 0, lty = 3)+
+  labs(
+    title = str_glue("Daily Returns of the stock for {company_ticker}"), 
+    subtitle = str_glue("Close stock prices since {start_date |> format('%d %B, %Y')}"),
+    x = "Date",
+    y = "Returns"
+    ) + 
+  theme_minimal()
+```
+
+::: callout-important
+## Look at the years!
+
+What can you say about this plot?
+
+-   It appears that there is a high **variability** of the log-returns in the year 2020
+
+-   This increase in **variance** seems to stabilise in 2021 and **reappear** in 2022
+
+-   The year 2023 is also quite stable
+
+All these point to signs of increased **variability** in times of **global crises**, which have added elements of uncertainty to the global supply chain.
+:::
+
+## Model: Create summary statistics
+
+-   We can obtain a summary table for some summary statistics with `summarise()`.
+
+-   We will compute the average return $\bar{r}$ and estimate the standard deviation (SD) of the log-returns $\hat{\sigma}$
+
+::: {#def-summary-statistics}
+These statistics are defined as follows:
+
+```{=tex}
+\begin{align}
+  \bar{r} &= \frac{1}{T}\sum_{t=1}^T r_t\\
+  \hat{\sigma}  &= \sqrt{\frac{1}{T-1}\sum_{t=1}^T \left(r_t - \bar{r}\right)^2}
+\end{align}
+```
+:::
+
+::: callout-caution
+## A word of warning
+
+While the average return might not mean much in theoretical terms, the standard deviation might give some idea of the *risk* or *volatility*.
+:::
+
+-   We can show the values in the following <mark>table</mark>:
+
+```{r}
+#| label: tbl-summary-aapl
+#| tbl-cap: "Summary statistics of the log-returns for AAPL"
+
+company_data |> 
+  summarise(`Average Return` = mean(daily_log_returns, na.rm = TRUE), 
+            `Average Risk (SD)` = sd(daily_log_returns, na.rm = TRUE)) |> 
+  gt() |> 
+  tab_header(
+    title= "Summary statistics of Tech companies stocks",
+    subtitle  = str_glue("From {start_date |> format('%d %b, %Y')} to {Sys.Date() |> format('%d %b, %Y')}")) |> 
+  fmt_number(decimals  = 4)
+```
+
+### Summary statistics by year
+
+And, seeing that the visualisation shows periods of high volatility in the year 2020, we can compute yearly measures of risk and volatility:
+
+```{r}
+company_data |> 
+  mutate(year = year(date)) |> 
+  group_by(year) |> 
+  summarise(`Average Return` = mean(daily_log_returns, na.rm = TRUE), 
+            `Risk (SD)` = sd(daily_log_returns, na.rm = TRUE)) |> 
+  gt() |> 
+  tab_header(
+    title= "Summary statistics of Tech companies stocks",
+    subtitle  = str_glue("From {start_date |> format('%d %b, %Y')} to {Sys.Date() |> format('%d %b, %Y')}")) |> 
+  fmt_number(columns = -year, decimals  = 4) |> 
+  tab_style(
+    style = list(
+      cell_fill(color = "lightgreen"), 
+      cell_text(color = "white")), 
+    locations = 
+      cells_body(columns = `Average Return`, 
+                 rows= `Average Return` >0)
+  ) |> 
+  tab_style(
+    style = list(
+      cell_fill(color = "red"), 
+      cell_text(color = "white")), 
+    locations = 
+      cells_body(columns = `Risk (SD)`, 
+                 rows= `Risk (SD)` >0.020)
+  )
+  
+
+```
+
+::: callout-important
+## Look at the years (again)!
+
+We're highlighting the years where the risk is higher. These numbers reflect the remarks we've made in the previous points, namely that global uncertainties have affected the risk of this stock.
+:::
+

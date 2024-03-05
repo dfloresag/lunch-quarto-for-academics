@@ -1,0 +1,24 @@
+---
+title: "The Data Science Pipeline"
+author: "EPFL Extension School"
+subtitle: An illustration of the Data Science Pipeline with R and Rmarkdown
+format: 
+  html:
+    theme: journal
+    number-sections: true
+    code-fold: show
+    highlight-style: zenburn
+    toc: true
+    df-print: paged
+    toc-location: left
+    toc-float:
+      smooth-scroll: true
+    title-block-banner: "#FF0000"
+    title-block-banner-color: "White"
+    linkcolor: "#FF0000"
+    mainfont: "arial"
+---
+
+  
+{{< include _index.qmd >}}
+

@@ -1,0 +1,309 @@
+---
+title: "Return Analysis"
+author: "EPFL Extension School"
+subtitle: An illustration of the Data Pipeline with R and Rmarkdown
+output:
+  html:
+    theme: default
+    highlight: zenburn
+    code-fold: hide
+    df-print: paged
+    toc: true
+    toc-expand: 2
+    number-sections: true
+params:
+  ticker: AAPL
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE, 
+                      warning = FALSE, 
+                      fig.align ="center", 
+                      fig.width = 16/1.3, 
+                      fig.height = 9/1.3)
+```
+
+
+```{r packages, include=FALSE}
+
+# {tidyverse} packages:
+
+# {readxl} to import data
+library(readxl)
+
+# {dplyr} and {tidyr} to clean and tidy data
+library(dplyr)
+library(tidyr)
+
+# {ggplot2} to visualise data
+library(ggplot2)
+
+# specialised packages:
+
+library(stringr)   # string manipulation
+library(lubridate) # time manipulation
+library(tsibble)
+library(hrbrthemes)
+```
+
+
+```{r}
+company_tickers <- c(
+  "AAPL", "MSFT", "GOOG", "AMZN", "TSLA") 
+company_names <- c(
+  "AAPL" = "Apple",
+  "MSFT" = "Microsoft", 
+  "GOOG" = "Alphabet (Google)", 
+  "AMZN" = "Amazon",
+  "TSLA"= "Tesla")
+company_colors <-  c(
+  "AAPL" = "#555555", 
+  "MSFT" = "#7FBA00", 
+  "GOOG" ="#4285F4" , 
+  "AMZN" = "#FF9900",
+  "TSLA" = "#cc0000"
+  )
+company_logos <- c(
+  "AAPL" = "../img/logos/apple.svg", 
+  "MSFT" = "../img/logos/microsoft.svg",
+  "GOOG" ="../img/logos/alphabet.svg", 
+  "AMZN" ="../img/logos/amazon.svg",
+  "TSLA" ="../img/logos/tesla.svg"
+)
+```
+
+```{r}
+company_ticker <- params$ticker
+```
+
+```{r}
+start_date <-  ymd("2020-03-11")
+```
+
+
+# Single company analysis
+
+For this single company analysis, we'll be focusing on the company 
+<mark>`r company_names[company_ticker]` </mark>
+
+
+```{r, out.width="20%", fig.align='center', fig.cap="Company Logo"}
+knitr::include_graphics(company_logos[company_ticker])
+```
+
+
+To narrow our focus, we will restrain our analysis to a given timeframe. Let's 
+focus on the performance of the stocks of <mark>`r company_names[company_ticker]`</mark> from the 
+beginning of the pandemic (March 11 2020) until now. 
+
+The data is stored in an Excel (`.xlsx`) sheet. We have imported it using the 
+`read_xlsx()` function from `{readxl}` to import it
+
+```{r}
+company_data <- 
+  read_xlsx("data/stocks_data.xlsx", sheet = company_ticker) 
+```
+
+We can explore the data by printing its first 6 lines: 
+
+```{r}
+head(company_data)
+```
+
+
+## Understanding the data
+
+### Tidying and transforming
+
+Since we are interested in the performance of the stock from the beginning of the 
+pandemic, we can use the function `filter()` from `{dplyr}`. 
+
+```{r}
+company_data <- company_data %>% 
+  filter(date > start_date) 
+```
+
+### Visualising the data
+
+With this data and the functions in `ggplot()`, we can create a first visualisation of
+the closing stock price. We set the dates on the `x` axis and the `close` price in the `y` axis.
+
+```{r}
+company_data %>% 
+  ggplot(aes(x = date))+
+  geom_line(aes(y = close),
+            color = company_colors[company_ticker]) +
+  labs(
+    title = str_glue("Daily price for {company_ticker}"), 
+    subtitle = str_glue("Close stock prices since {start_date %>% format('%d %B, %Y')}"),
+    x = "Date",
+    y = "Close Price"
+    ) + 
+  theme_ipsum_rc()+
+  scale_color_manual(values = company_colors)
+```
+
+### The loop of Understanding: 
+
+The visualisation offers a first clance. We can transform again to ask the questions on the 
+returns. We use the function `mutate()`, alongside `lag(0` to create a column with the 
+daily (log) returns. 
+
+```{r}
+company_data <- company_data %>% 
+  mutate(daily_log_returns = log(close)-log(lag(close)))
+```
+
+We can construct a visualisation with this. Additionally, we can add layers to 
+our visualisation to decorate it at will. 
+
+```{r}
+company_data %>% 
+  ggplot(aes(x = date))+
+  geom_line(aes(y = daily_log_returns), 
+            alpha = 0.5, 
+            color = company_colors[company_ticker]) +
+  geom_hline(yintercept = 0, lty = 3)+
+  labs(
+    title = str_glue("Daily Returns of the stock for {company_ticker}"), 
+    subtitle = str_glue("Close stock prices since {start_date %>% format('%d %B, %Y')}"),
+    x = "Date",
+    y = "Returns"
+    ) + 
+  theme_ipsum_rc()
+
+```
+
+
+We can obtain a summary table for some summary statisics with `summarise()`
+
+```{r}
+company_data %>% 
+  summarise(`Average Return` = mean(daily_log_returns, na.rm = TRUE), 
+            `Average Risk (SD)` = sd(daily_log_returns, na.rm = TRUE))
+```
+
+And, seeing that the visualisation shows periods of high volatility in the year 
+2020, we can compute yearly measures of risk and volatility: 
+
+```{r}
+company_data %>% 
+  mutate(year = year(date)) %>% 
+  group_by(year) %>% 
+  summarise(`Average Return` = mean(daily_log_returns, na.rm = TRUE), 
+            `Average Risk (SD)` = sd(daily_log_returns, na.rm = TRUE))
+
+```
+
+
+# Analysis for all companies
+
+
+```{r}
+read_sheet <- function(sheet){
+  read_xlsx(
+    path = "data/stocks_data.xlsx", 
+    sheet = sheet)
+}
+
+library(purrr)
+
+returns_data <- 
+  company_tickers %>% 
+  map(read_sheet) %>% 
+  bind_rows() %>%
+  filter(date > start_date) %>% 
+  select(symbol,date, close) %>% 
+  group_by(symbol) %>% 
+  mutate(daily_log_returns = log(close) - log(lag(close))) %>% 
+  ungroup() 
+
+```
+
+## Plotting the stock price
+
+Here's a chart with the closing stock prices for all companies. 
+
+```{r}
+returns_data %>% 
+  ggplot(aes(x = date, y = close,  group = symbol, color = symbol))+
+  geom_line(alpha=0.5)+
+  labs(
+    title = str_glue("Daily price for {glue::glue_collapse(company_tickers, sep = ', ')}"), 
+    subtitle = str_glue("Close stock prices since {start_date %>% format('%d %B, %Y')}"),
+    x = "Date",
+    y = "Close Price"
+    ) + 
+  theme_ipsum_rc()+
+  scale_color_manual(values = company_colors)
+```
+
+From the plot, we can gather that TESLA INC (TSLA) has the clearest trend of growth. 
+However this seems to be associated with a very high risk, as it the prices look very 
+variable over the years. 
+
+## Returns by company
+
+To gain more insight in what pertains returns of these stocks, we can compute 
+the returns for all companies. For easier visualisation, we can separate them according to the company. 
+
+```{r}
+returns_data %>% 
+  ggplot(aes(x = date, y = daily_log_returns,  group = symbol, color = symbol))+
+  geom_line(alpha = 0.5) +
+  labs(
+    title = str_glue("Daily Returns of the stock for {glue::glue_collapse(company_tickers, sep = ', ')}"), 
+    subtitle = str_glue("Close stock prices since {start_date %>% format('%d %B, %Y')}"),
+    x = "Date",
+    y = "Returns"
+    ) + 
+  theme_minimal()+
+  facet_grid(rows = vars(symbol)) + 
+  theme_ipsum_rc()+
+  theme(legend.position = "none")+ 
+  scale_color_manual(values = company_colors)
+```
+
+## Average returns and Risk over the years
+
+```{r}
+mean_and_sd <- 
+  returns_data %>% 
+  mutate(year = year(date)) %>% 
+  group_by(symbol, year) %>% 
+  summarise(
+    average_return = mean(daily_log_returns, na.rm = TRUE), 
+    sd_return = sd(daily_log_returns, na.rm = TRUE)
+    )
+```
+
+
+```{r}
+mean_and_sd %>% 
+  select(-sd_return) %>% 
+  mutate(average_return = round(average_return*100, digits = 4)) %>% 
+  pivot_wider(names_from = year,values_from = average_return) %>% 
+  knitr::kable(caption = "Table 1 : Average return (in percentage points)")
+```
+
+```{r}
+mean_and_sd %>% 
+  select(-average_return) %>% 
+  mutate(sd_return = round(sd_return*100, digits = 4)) %>% 
+  pivot_wider(names_from = year,values_from = sd_return) %>% 
+  knitr::kable(caption = "Table 2 : Risk (SD in percentage points)")
+```
+
+```{r, echo = FALSE, eval = FALSE}
+log_returns_data %>% 
+  nest(-symbol)
+```
+```{r, echo = FALSE, eval = FALSE}
+log_returns_data %>% 
+  ggplot(aes(x = date, y = daily_log_returns, group = symbol, color = symbol))+
+  geom_line(alpha = 0.3)
+
+```
+
