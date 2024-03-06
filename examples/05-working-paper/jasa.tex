@@ -18,7 +18,7 @@
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else  
+\ifPDFTeX\else
     % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
@@ -50,46 +50,6 @@
   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{241,243,245}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
-\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -192,12 +152,6 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\makeatletter
-\@ifpackageloaded{tikz}{}{\usepackage{tikz}}
-\makeatother
-        \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-          \node[shape=circle,draw,inner sep=1pt] (char) {{\scriptsize#1}};}}  
-                  
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -275,22 +229,6 @@ Importing the data
   We've imported the data using the package \texttt{\{tidyquant\}}.
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{get\_what }\OtherTok{\textless{}{-}} \StringTok{"stock.prices"}
-\NormalTok{companies }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"AAPL"}\NormalTok{,}
-             \StringTok{"MSFT"}\NormalTok{,}
-             \StringTok{"GOOG"}\NormalTok{,}
-             \StringTok{"AMZN"}\NormalTok{,}
-             \StringTok{"TSLA"}\NormalTok{)}
-
-\NormalTok{stocks\_data }\OtherTok{\textless{}{-}} 
-\NormalTok{  companies }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{map}\NormalTok{(tq\_get, }\AttributeTok{get =}\NormalTok{ get\_what) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{bind\_rows}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{itemize}
 \tightlist
 \item
@@ -299,14 +237,6 @@ Importing the data
   Inc.~\textbf{(GOOG)}, Amazon Inc.~\textbf{(AMZN)} and Tesla
   Inc.~\textbf{(TSLA).}
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{stocks\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n=}\DecValTok{6}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{kable}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0959}}
@@ -355,7 +285,7 @@ AAPL & 2014-01-07 & 19.44000 & 19.49857 & 19.21143 & 19.28714 &
 AAPL & 2014-01-08 & 19.24321 & 19.48429 & 19.23893 & 19.40929 &
 258529600 & 16.99427 \\
 AAPL & 2014-01-09 & 19.52857 & 19.53071 & 19.11964 & 19.16143 &
-279148800 & 16.77726 \\
+279148800 & 16.77725 \\
 
 \end{longtable}
 
@@ -370,12 +300,6 @@ Tidying the data
   Later, this will help us \emph{parametrise} our report
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{company\_ticker }\OtherTok{\textless{}{-}} \StringTok{"AAPL"}
-\end{Highlighting}
-\end{Shaded}
-
 \section{Choosing a Timeframe}
 
 \begin{itemize}
@@ -388,12 +312,6 @@ Tidying the data
   The \texttt{start\_date} variable can store this information.
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{start\_date }\OtherTok{\textless{}{-}}  \FunctionTok{ymd}\NormalTok{(}\StringTok{"2020{-}03{-}11"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \section{Filtering the data}
 
 \begin{itemize}
@@ -404,27 +322,11 @@ Tidying the data
   the given timeframe.
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{company\_data }\OtherTok{\textless{}{-}} 
-\NormalTok{  stocks\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{filter}\NormalTok{(symbol }\SpecialCharTok{==}\NormalTok{ company\_ticker, }
-\NormalTok{         date }\SpecialCharTok{\textgreater{}}\NormalTok{ start\_date) }
-\end{Highlighting}
-\end{Shaded}
-
 \begin{itemize}
 \tightlist
 \item
   We can explore the data by printing its first 6 lines:
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{head}\NormalTok{(company\_data) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{kable}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1014}}
@@ -467,7 +369,7 @@ AAPL & 2020-03-12 & 63.9850 & 67.5000 & 62.0000 & 62.0575 & 418474000 &
 AAPL & 2020-03-13 & 66.2225 & 69.9800 & 63.2375 & 69.4925 & 370732000 &
 67.77602 \\
 AAPL & 2020-03-16 & 60.4875 & 64.7700 & 60.0000 & 60.5525 & 322423600 &
-59.05684 \\
+59.05683 \\
 AAPL & 2020-03-17 & 61.8775 & 64.4025 & 59.6000 & 63.2150 & 324056000 &
 61.65356 \\
 AAPL & 2020-03-18 & 59.9425 & 62.5000 & 59.2800 & 61.6675 & 300233600 &
@@ -489,14 +391,6 @@ Understanding the data
   We set the dates on the \texttt{x} axis and the \texttt{close} price
   in the \texttt{y} axis.
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{company\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date))}\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ close)) }
-\end{Highlighting}
-\end{Shaded}
 
 \includegraphics{jasa_files/figure-pdf/unnamed-chunk-6-1.pdf}
 
@@ -529,36 +423,13 @@ r_t = \log(p_t) - \log(p_{t-1}) \approx \frac{p_t - p_{t-1}}{p_{t-1}}
   equation Definition~\ref{def-log-returns}
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{company\_data }\OtherTok{\textless{}{-}}\NormalTok{ company\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{daily\_log\_returns =} \FunctionTok{log}\NormalTok{(close)}\SpecialCharTok{{-}}\FunctionTok{log}\NormalTok{(}\FunctionTok{lag}\NormalTok{(close)))}
-\end{Highlighting}
-\end{Shaded}
-
 \section{Visualize again:
 log-returns}\label{visualize-again-log-returns}
 
 We can construct a visualisation with this. Additionally, we can add
 layers to our visualisation to decorate it at will.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{company\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date))}\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ daily\_log\_returns), }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{color =} \StringTok{"\#555555"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty =} \DecValTok{3}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{title =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"Daily Returns of the stock for \{company\_ticker\}"}\NormalTok{), }
-    \AttributeTok{subtitle =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"Close stock prices since \{start\_date |\textgreater{} format(\textquotesingle{}\%d \%B, \%Y\textquotesingle{})\}"}\NormalTok{),}
-    \AttributeTok{x =} \StringTok{"Date"}\NormalTok{,}
-    \AttributeTok{y =} \StringTok{"Returns"}
-\NormalTok{    ) }\SpecialCharTok{+} 
-  \FunctionTok{theme\_minimal}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
+\begin{figure}
 
 \centering{
 
@@ -570,7 +441,7 @@ layers to our visualisation to decorate it at will.
 
 \end{figure}%
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, breakable, colback=white, titlerule=0mm, colframe=quarto-callout-important-color-frame, opacityback=0, bottomrule=.15mm, opacitybacktitle=0.6, left=2mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Look at the years!}, bottomtitle=1mm, coltitle=black, toptitle=1mm, arc=.35mm, toprule=.15mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, toptitle=1mm, bottomrule=.15mm, left=2mm, arc=.35mm, colframe=quarto-callout-important-color-frame, rightrule=.15mm, opacityback=0, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Look at the years!}, bottomtitle=1mm, breakable, leftrule=.75mm, colback=white, opacitybacktitle=0.6, toprule=.15mm]
 
 What can you say about this plot?
 
@@ -614,7 +485,7 @@ These statistics are defined as follows:
 
 \end{definition}
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, colbacktitle=quarto-callout-caution-color!10!white, breakable, colback=white, titlerule=0mm, colframe=quarto-callout-caution-color-frame, opacityback=0, bottomrule=.15mm, opacitybacktitle=0.6, left=2mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{A word of warning}, bottomtitle=1mm, coltitle=black, toptitle=1mm, arc=.35mm, toprule=.15mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, toptitle=1mm, bottomrule=.15mm, left=2mm, arc=.35mm, colframe=quarto-callout-caution-color-frame, rightrule=.15mm, opacityback=0, coltitle=black, colbacktitle=quarto-callout-caution-color!10!white, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{A word of warning}, bottomtitle=1mm, breakable, leftrule=.75mm, colback=white, opacitybacktitle=0.6, toprule=.15mm]
 
 While the average return might not mean much in theoretical terms, the
 standard deviation might give some idea of the \emph{risk} or
@@ -628,19 +499,6 @@ standard deviation might give some idea of the \emph{risk} or
   We can show the values in the following table:
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{company\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{summarise}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Average Return}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{mean}\NormalTok{(daily\_log\_returns, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
-            \StringTok{\textasciigrave{}}\AttributeTok{Average Risk (SD)}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sd}\NormalTok{(daily\_log\_returns, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{gt}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{tab\_header}\NormalTok{(}
-    \AttributeTok{title=} \StringTok{"Summary statistics of Tech companies stocks"}\NormalTok{,}
-    \AttributeTok{subtitle  =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"From \{start\_date |\textgreater{} format(\textquotesingle{}\%d \%b, \%Y\textquotesingle{})\} to \{Sys.Date() |\textgreater{} format(\textquotesingle{}\%d \%b, \%Y\textquotesingle{})\}"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{fmt\_number}\NormalTok{(}\AttributeTok{decimals  =} \DecValTok{4}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{longtable}{rr}
 
 \caption{\label{tbl-summary-aapl}Summary statistics of the log-returns
@@ -649,13 +507,13 @@ for AAPL}
 \tabularnewline
 
 \caption*{
-{\large Summary statistics of Tech companies stocks} \\ 
+{\large Summary statistics of Tech companies stocks} \\
 {\small From 11 Mar, 2020 to 05 Mar, 2024}
-} \\ 
+} \\
 \toprule
-Average Return & Average Risk (SD) \\ 
+Average Return & Average Risk (SD) \\
 \midrule\addlinespace[2.5pt]
-$0.0010$ & $0.0200$ \\ 
+$0.0010$ & $0.0200$ \\
 \bottomrule
 
 \end{longtable}
@@ -666,54 +524,23 @@ year}\label{summary-statistics-by-year}
 And, seeing that the visualisation shows periods of high volatility in
 the year 2020, we can compute yearly measures of risk and volatility:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{company\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{year =} \FunctionTok{year}\NormalTok{(date)) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{group\_by}\NormalTok{(year) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{summarise}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Average Return}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{mean}\NormalTok{(daily\_log\_returns, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
-            \StringTok{\textasciigrave{}}\AttributeTok{Risk (SD)}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{sd}\NormalTok{(daily\_log\_returns, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{gt}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{tab\_header}\NormalTok{(}
-    \AttributeTok{title=} \StringTok{"Summary statistics of Tech companies stocks"}\NormalTok{,}
-    \AttributeTok{subtitle  =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"From \{start\_date |\textgreater{} format(\textquotesingle{}\%d \%b, \%Y\textquotesingle{})\} to \{Sys.Date() |\textgreater{} format(\textquotesingle{}\%d \%b, \%Y\textquotesingle{})\}"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{fmt\_number}\NormalTok{(}\AttributeTok{columns =} \SpecialCharTok{{-}}\NormalTok{year, }\AttributeTok{decimals  =} \DecValTok{4}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{tab\_style}\NormalTok{(}
-    \AttributeTok{style =} \FunctionTok{list}\NormalTok{(}
-      \FunctionTok{cell\_fill}\NormalTok{(}\AttributeTok{color =} \StringTok{"lightgreen"}\NormalTok{), }
-      \FunctionTok{cell\_text}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{)), }
-    \AttributeTok{locations =} 
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =} \StringTok{\textasciigrave{}}\AttributeTok{Average Return}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{Average Return}\StringTok{\textasciigrave{}} \SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)}
-\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{tab\_style}\NormalTok{(}
-    \AttributeTok{style =} \FunctionTok{list}\NormalTok{(}
-      \FunctionTok{cell\_fill}\NormalTok{(}\AttributeTok{color =} \StringTok{"red"}\NormalTok{), }
-      \FunctionTok{cell\_text}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{)), }
-    \AttributeTok{locations =} 
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =} \StringTok{\textasciigrave{}}\AttributeTok{Risk (SD)}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{Risk (SD)}\StringTok{\textasciigrave{}} \SpecialCharTok{\textgreater{}}\FloatTok{0.020}\NormalTok{)}
-\NormalTok{  )}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{longtable*}{rrr}
 \caption*{
-{\large Summary statistics of Tech companies stocks} \\ 
+{\large Summary statistics of Tech companies stocks} \\
 {\small From 11 Mar, 2020 to 05 Mar, 2024}
-} \\ 
+} \\
 \toprule
-year & Average Return & Risk (SD) \\ 
+year & Average Return & Risk (SD) \\
 \midrule\addlinespace[2.5pt]
-2020 & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0037$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0283$}} \\ 
-2021 & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0012$}} & $0.0158$ \\ 
-2022 & $-0.0012$ & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0224$}} \\ 
-2023 & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0016$}} & $0.0128$ \\ 
-2024 & $-0.0022$ & $0.0123$ \\ 
+2020 & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0037$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0283$}} \\
+2021 & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0012$}} & $0.0158$ \\
+2022 & $-0.0012$ & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0224$}} \\
+2023 & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0016$}} & $0.0128$ \\
+2024 & $-0.0022$ & $0.0123$ \\
 \bottomrule
 \end{longtable*}
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, breakable, colback=white, titlerule=0mm, colframe=quarto-callout-important-color-frame, opacityback=0, bottomrule=.15mm, opacitybacktitle=0.6, left=2mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Look at the years (again)!}, bottomtitle=1mm, coltitle=black, toptitle=1mm, arc=.35mm, toprule=.15mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, toptitle=1mm, bottomrule=.15mm, left=2mm, arc=.35mm, colframe=quarto-callout-important-color-frame, rightrule=.15mm, opacityback=0, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Look at the years (again)!}, bottomtitle=1mm, breakable, leftrule=.75mm, colback=white, opacitybacktitle=0.6, toprule=.15mm]
 
 We're highlighting the years where the risk is higher. These numbers
 reflect the remarks we've made in the previous points, namely that
@@ -730,18 +557,6 @@ Analyzing multiple companies
   We import the data and prepare it for analysis
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{returns\_data }\OtherTok{\textless{}{-}} 
-\NormalTok{  stocks\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{\textgreater{}}\NormalTok{ start\_date) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{select}\NormalTok{(symbol,date, close) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{group\_by}\NormalTok{(symbol) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{daily\_log\_returns =} \FunctionTok{log}\NormalTok{(close) }\SpecialCharTok{{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{lag}\NormalTok{(close))) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{ungroup}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
 \section{Plotting the stock price}\label{plotting-the-stock-price}
 
 \begin{itemize}
@@ -750,23 +565,7 @@ Analyzing multiple companies
   Let's plot the whole
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{returns\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ close,  }\AttributeTok{group =}\NormalTok{ symbol, }\AttributeTok{color =}\NormalTok{ symbol))}\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{title =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"Daily price for \{glue::glue\_collapse(company\_tickers, sep = \textquotesingle{}, \textquotesingle{})\}"}\NormalTok{), }
-    \AttributeTok{subtitle =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"Close stock prices since \{start\_date |\textgreater{} format(\textquotesingle{}\%d \%B, \%Y\textquotesingle{})\}"}\NormalTok{),}
-    \AttributeTok{x =} \StringTok{"Date"}\NormalTok{,}
-    \AttributeTok{y =} \StringTok{"Close Price"}
-\NormalTok{    ) }\SpecialCharTok{+} 
-  \FunctionTok{theme\_minimal}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ company\_colors)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
+\begin{figure}
 
 \centering{
 
@@ -795,24 +594,7 @@ selected period}
   in a single frame
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{returns\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ daily\_log\_returns,  }\AttributeTok{group =}\NormalTok{ symbol, }\AttributeTok{color =}\NormalTok{ symbol))}\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{title =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"Daily Returns of the stock for all companies"}\NormalTok{), }
-    \AttributeTok{subtitle =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"Close stock prices since \{start\_date |\textgreater{} format(\textquotesingle{}\%d \%B, \%Y\textquotesingle{})\}"}\NormalTok{),}
-    \AttributeTok{x =} \StringTok{"Date"}\NormalTok{,}
-    \AttributeTok{y =} \StringTok{"Returns"}
-\NormalTok{    ) }\SpecialCharTok{+} 
-  \FunctionTok{theme\_minimal}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}\SpecialCharTok{+} 
-  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ company\_colors)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
+\begin{figure}
 
 \centering{
 
@@ -824,7 +606,7 @@ selected period}
 
 \end{figure}%
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, breakable, colback=white, titlerule=0mm, colframe=quarto-callout-important-color-frame, opacityback=0, bottomrule=.15mm, opacitybacktitle=0.6, left=2mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Create a faceted chart}, bottomtitle=1mm, coltitle=black, toptitle=1mm, arc=.35mm, toprule=.15mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, toptitle=1mm, bottomrule=.15mm, left=2mm, arc=.35mm, colframe=quarto-callout-important-color-frame, rightrule=.15mm, opacityback=0, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Create a faceted chart}, bottomtitle=1mm, breakable, leftrule=.75mm, colback=white, opacitybacktitle=0.6, toprule=.15mm]
 
 \begin{itemize}
 \tightlist
@@ -846,32 +628,7 @@ selected period}
   This creates a \_mini\_ plot according to a variable
 \end{itemize}
 
-\phantomsection\label{annotated-cell-11}%
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{returns\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ daily\_log\_returns,  }\AttributeTok{group =}\NormalTok{ symbol, }\AttributeTok{color =}\NormalTok{ symbol))}\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}
-    \AttributeTok{title =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"Daily Returns of the stock for all companies"}\NormalTok{), }
-    \AttributeTok{subtitle =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"Close stock prices since \{start\_date |\textgreater{} format(\textquotesingle{}\%d \%B, \%Y\textquotesingle{})\}"}\NormalTok{),}
-    \AttributeTok{x =} \StringTok{"Date"}\NormalTok{,}
-    \AttributeTok{y =} \StringTok{"Returns"}
-\NormalTok{    ) }\SpecialCharTok{+} 
-  \FunctionTok{theme\_minimal}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(symbol)) }\SpecialCharTok{+} \hspace*{\fill}\NormalTok{\circled{1}}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}\SpecialCharTok{+} 
-  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ company\_colors)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{description}
-\tightlist
-\item[\circled{1}]
-On this line we added the faceted chart
-\end{description}
-
-\begin{figure}[H]
+\begin{figure}
 
 \centering{
 
@@ -884,7 +641,14 @@ companies - faceted}
 
 \end{figure}%
 
-\begin{tcolorbox}[enhanced jigsaw, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, breakable, colback=white, titlerule=0mm, colframe=quarto-callout-important-color-frame, opacityback=0, bottomrule=.15mm, opacitybacktitle=0.6, left=2mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{What can we see?}, bottomtitle=1mm, coltitle=black, toptitle=1mm, arc=.35mm, toprule=.15mm, leftrule=.75mm]
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  On this line we added the faceted chart
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, titlerule=0mm, toptitle=1mm, bottomrule=.15mm, left=2mm, arc=.35mm, colframe=quarto-callout-important-color-frame, rightrule=.15mm, opacityback=0, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{What can we see?}, bottomtitle=1mm, breakable, leftrule=.75mm, colback=white, opacitybacktitle=0.6, toprule=.15mm]
 
 \begin{itemize}
 \item
@@ -906,67 +670,6 @@ companies - faceted}
 \section{Average Returns for all
 companies}\label{average-returns-for-all-companies}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{mean\_and\_sd }\OtherTok{\textless{}{-}} 
-\NormalTok{  returns\_data }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{year =} \FunctionTok{year}\NormalTok{(date)) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{group\_by}\NormalTok{(symbol, year) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{summarise}\NormalTok{(}
-    \AttributeTok{average\_return =} \FunctionTok{mean}\NormalTok{(daily\_log\_returns, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
-    \AttributeTok{sd\_return =} \FunctionTok{sd}\NormalTok{(daily\_log\_returns, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{    ) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{ungroup}\NormalTok{()}
-
-\NormalTok{mean\_and\_sd }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{sd\_return) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{names\_from =}\NormalTok{ year,}\AttributeTok{values\_from =}\NormalTok{ average\_return) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{gt}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{tab\_header}\NormalTok{(}
-    \AttributeTok{title=} \StringTok{"Average Yearly returns of Tech companies"}\NormalTok{,}
-    \AttributeTok{subtitle  =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"From \{start\_date |\textgreater{} format(\textquotesingle{}\%d \%b, \%Y\textquotesingle{})\} to \{Sys.Date() |\textgreater{} format(\textquotesingle{}\%d \%b, \%Y\textquotesingle{})\}"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{fmt\_number}\NormalTok{(}\AttributeTok{columns =} \SpecialCharTok{{-}}\NormalTok{symbol, }\AttributeTok{decimals  =} \DecValTok{4}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{tab\_style}\NormalTok{(}
-    \AttributeTok{style =} \FunctionTok{list}\NormalTok{(}
-      \FunctionTok{cell\_fill}\NormalTok{(}\AttributeTok{color =} \StringTok{"lightgreen"}\NormalTok{), }
-      \FunctionTok{cell\_text}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{)), }
-    \AttributeTok{locations =} \FunctionTok{list}\NormalTok{(}
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2020}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2020}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{ ), }
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2021}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2021}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{ ), }
-       \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{ ), }
-       \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{ ), }
-       \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2023}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2023}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{ ), }
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2024}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2024}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{ )}
-\NormalTok{    )}
-\NormalTok{  ) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{tab\_style}\NormalTok{(}
-    \AttributeTok{style =} \FunctionTok{list}\NormalTok{(}
-      \FunctionTok{cell\_fill}\NormalTok{(}\AttributeTok{color =} \StringTok{"red"}\NormalTok{), }
-      \FunctionTok{cell\_text}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{)), }
-        \AttributeTok{locations =} \FunctionTok{list}\NormalTok{(}
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2020}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2020}\StringTok{\textasciigrave{}}\SpecialCharTok{\textless{}=}\DecValTok{0}\NormalTok{ ), }
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2021}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2021}\StringTok{\textasciigrave{}}\SpecialCharTok{\textless{}=}\DecValTok{0}\NormalTok{ ), }
-       \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\SpecialCharTok{\textless{}=}\DecValTok{0}\NormalTok{ ), }
-       \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\SpecialCharTok{\textless{}=} \DecValTok{0}\NormalTok{ ), }
-       \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2023}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2023}\StringTok{\textasciigrave{}}\SpecialCharTok{\textless{}=}\DecValTok{0}\NormalTok{ ), }
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2024}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2024}\StringTok{\textasciigrave{}}\SpecialCharTok{\textless{}=}\DecValTok{0}\NormalTok{ )}
-\NormalTok{    )}
-\NormalTok{  )}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{longtable}{lrrrrr}
 
 \caption{\label{tbl-average-returns-all-companies}Average Returns for
@@ -975,54 +678,22 @@ all companies}
 \tabularnewline
 
 \caption*{
-{\large Average Yearly returns of Tech companies} \\ 
+{\large Average Yearly returns of Tech companies} \\
 {\small From 11 Mar, 2020 to 05 Mar, 2024}
-} \\ 
+} \\
 \toprule
-symbol & 2020 & 2021 & 2022 & 2023 & 2024 \\ 
+symbol & 2020 & 2021 & 2022 & 2023 & 2024 \\
 \midrule\addlinespace[2.5pt]
-AAPL & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0037$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0012$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0012$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0016$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0022$}} \\ 
-AMZN & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0033$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0001$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0027$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0024$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0036$}} \\ 
-GOOG & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0022$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0020$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0019$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0019$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0011$}} \\ 
-MSFT & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0023$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0016$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0013$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0018$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0023$}} \\ 
-TSLA & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0090$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0016$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0042$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0028$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0065$}} \\ 
+AAPL & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0037$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0012$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0012$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0016$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0022$}} \\
+AMZN & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0033$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0001$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0027$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0024$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0036$}} \\
+GOOG & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0022$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0020$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0019$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0019$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0011$}} \\
+MSFT & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0023$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0016$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0013$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0018$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0023$}} \\
+TSLA & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0090$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0016$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0042$}} & \cellcolor[HTML]{90EE90}{\textcolor[HTML]{FFFFFF}{$0.0028$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$-0.0065$}} \\
 \bottomrule
 
 \end{longtable}
 
 \section{Risk (SD) all companies}\label{risk-sd-all-companies}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{mean\_and\_sd }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{average\_return) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{names\_from =}\NormalTok{ year,}\AttributeTok{values\_from =}\NormalTok{ sd\_return) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{gt}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{tab\_header}\NormalTok{(}
-    \AttributeTok{title=} \StringTok{"Average Yearly SDs of Tech companies"}\NormalTok{,}
-    \AttributeTok{subtitle  =} \FunctionTok{str\_glue}\NormalTok{(}\StringTok{"From \{start\_date |\textgreater{} format(\textquotesingle{}\%d \%b, \%Y\textquotesingle{})\} to \{Sys.Date() |\textgreater{} format(\textquotesingle{}\%d \%b, \%Y\textquotesingle{})\}"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{fmt\_number}\NormalTok{(}\AttributeTok{columns =} \SpecialCharTok{{-}}\NormalTok{symbol, }\AttributeTok{decimals  =} \DecValTok{4}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
-  \FunctionTok{tab\_style}\NormalTok{(}
-    \AttributeTok{style =} \FunctionTok{list}\NormalTok{(}
-      \FunctionTok{cell\_fill}\NormalTok{(}\AttributeTok{color =} \StringTok{"red"}\NormalTok{), }
-      \FunctionTok{cell\_text}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{)), }
-        \AttributeTok{locations =} \FunctionTok{list}\NormalTok{(}
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2020}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2020}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}=}\FloatTok{0.020}\NormalTok{), }
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2021}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2021}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}=}\FloatTok{0.020}\NormalTok{ ), }
-       \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}=}\FloatTok{0.020}\NormalTok{  ), }
-       \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2022}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}=}\FloatTok{0.020}\NormalTok{  ), }
-       \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2023}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2023}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}=}\FloatTok{0.020}\NormalTok{  ), }
-      \FunctionTok{cells\_body}\NormalTok{(}\AttributeTok{columns =}\StringTok{\textasciigrave{}}\AttributeTok{2024}\StringTok{\textasciigrave{}}\NormalTok{, }
-                 \AttributeTok{rows=} \StringTok{\textasciigrave{}}\AttributeTok{2024}\StringTok{\textasciigrave{}}\SpecialCharTok{\textgreater{}=}\FloatTok{0.020}\NormalTok{)}
-\NormalTok{    )}
-\NormalTok{  )}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{longtable}{lrrrrr}
 
@@ -1032,17 +703,17 @@ period}
 \tabularnewline
 
 \caption*{
-{\large Average Yearly SDs of Tech companies} \\ 
+{\large Average Yearly SDs of Tech companies} \\
 {\small From 11 Mar, 2020 to 05 Mar, 2024}
-} \\ 
+} \\
 \toprule
-symbol & 2020 & 2021 & 2022 & 2023 & 2024 \\ 
+symbol & 2020 & 2021 & 2022 & 2023 & 2024 \\
 \midrule\addlinespace[2.5pt]
-AAPL & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0283$}} & $0.0158$ & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0224$}} & $0.0128$ & $0.0123$ \\ 
-AMZN & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0237$}} & $0.0152$ & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0316$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0207$}} & $0.0180$ \\ 
-GOOG & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0234$}} & $0.0149$ & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0244$}} & $0.0193$ & $0.0185$ \\ 
-MSFT & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0268$}} & $0.0132$ & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0223$}} & $0.0157$ & $0.0113$ \\ 
-TSLA & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0538$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0342$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0423$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0340$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0309$}} \\ 
+AAPL & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0283$}} & $0.0158$ & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0224$}} & $0.0128$ & $0.0123$ \\
+AMZN & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0237$}} & $0.0152$ & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0316$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0207$}} & $0.0180$ \\
+GOOG & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0234$}} & $0.0149$ & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0244$}} & $0.0193$ & $0.0185$ \\
+MSFT & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0268$}} & $0.0132$ & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0223$}} & $0.0157$ & $0.0113$ \\
+TSLA & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0538$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0342$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0423$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0340$}} & \cellcolor[HTML]{FF0000}{\textcolor[HTML]{FFFFFF}{$0.0309$}} \\
 \bottomrule
 
 \end{longtable}

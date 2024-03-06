@@ -1,9 +1,9 @@
 ---
 title: "The Data Science Pipeline"
 author: "EPFL Extension School"
-subtitle: An illustration of the Data Science Pipeline with R and Rmarkdown
+subtitle: "An illustration of the Data Science Pipeline with R and Rmarkdown"
 format: html
-# editor: visual
+editor: visual
 ---
 
 ```{r setup, include=FALSE}
@@ -71,6 +71,18 @@ stocks_data |>
 ```
 
 # Tidying the data
+
+::: panel-tabset
+## tab 1
+
+asdfasdf
+
+```{r}
+"hello"
+```
+
+## tab 2
+:::
 
 ::: panel-tabset
 ## Choosing a Company
@@ -154,7 +166,7 @@ company_data <- company_data |>
 
 ## Visualize again: log-returns
 
-We can construct a visualisation with this. Additionally, we can add layers to our visualisation to decorate it at will.
+We can construct a visualisation with this. Additionally, we can add layers to our visualisation to decorate it at will. @fig-log-returns-aapl
 
 ```{r}
 #| label: fig-log-returns-aapl

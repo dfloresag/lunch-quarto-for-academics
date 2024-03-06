@@ -1,0 +1,29 @@
+```{r packages, include=FALSE}
+
+# {tidyverse} packages:
+
+# {dplyr} and {tidyr} to clean and tidy data
+library(tidyverse)
+
+# {ggplot2} to visualise data
+library(ggplot2)
+
+# specialised packages:
+
+library(lubridate) # time manipulation
+library(tsibble)
+library(tidyquant)
+library(purrr)
+library(gt)
+library(knitr)
+```
+
+In this lesson we will explore how to carry the steps of the Data Science pipeline to produce an analysis
+
+![](img/fig-data-pipeline-empty.png)
+
+To illustrate, we will study the stocks of **five tech companies**
+
+-   First we'll focus on a single company
+
+-   Then we'll see how all these companies have fared over time.

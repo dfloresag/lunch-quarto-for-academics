@@ -13,8 +13,6 @@ format:
   html:
     theme: cosmo
     code-line-numbers: true
-  pdf:
-    documentclass: scrreprt
 
 editor: visual
 

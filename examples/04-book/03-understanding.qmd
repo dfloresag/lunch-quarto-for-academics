@@ -1,11 +1,23 @@
-```{r, include = FALSE}
-#| message: false
-#| warning: false
+```{r}
+#| include: false
+
+# {tidyverse} packages:
+
+# {dplyr} and {tidyr} to clean and tidy data
 library(tidyverse)
+
+# {ggplot2} to visualise data
+library(ggplot2)
+
+# specialised packages:
+
+library(lubridate) # time manipulation
+library(tsibble)
 library(tidyquant)
-library(lubridate)
-library(knitr)
+library(purrr)
 library(gt)
+library(knitr)
+
 get_what <- "stock.prices"
 companies <- c("AAPL",
              "MSFT",
@@ -174,4 +186,3 @@ company_data |>
 
 We're highlighting the years where the risk is higher. These numbers reflect the remarks we've made in the previous points, namely that global uncertainties have affected the risk of this stock.
 :::
-

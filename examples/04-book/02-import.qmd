@@ -1,11 +1,22 @@
-```{r, include = FALSE}
-#| message: false
-#| warning: false
+```{r}
+#| include: false
+
+# {tidyverse} packages:
+
+# {dplyr} and {tidyr} to clean and tidy data
 library(tidyverse)
+
+# {ggplot2} to visualise data
+library(ggplot2)
+
+# specialised packages:
+
+library(lubridate) # time manipulation
+library(tsibble)
 library(tidyquant)
-library(lubridate)
-library(knitr)
+library(purrr)
 library(gt)
+library(knitr)
 ```
 
 # Importing the data
@@ -86,4 +97,3 @@ head(company_data) |>
   kable()
 ```
 :::
-

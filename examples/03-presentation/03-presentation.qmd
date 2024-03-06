@@ -21,6 +21,4 @@ format:
     editor: visual
 ---
 
-  
 {{< include _content.qmd >}}
-

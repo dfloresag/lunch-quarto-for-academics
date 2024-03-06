@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Importing the data</title>
+<title>The Data Science Pipeline - 2&nbsp; Importing the data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-import.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importing the data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-import.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">{tidyverse} packages:</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -128,6 +128,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">The Data Science Pipeline</a> 
+    </div>
+      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -138,25 +143,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">{tidyverse} packages:</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-import.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importing the data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">{tidyverse} packages:</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-understanding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Understanding the data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">{tidyverse} packages:</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-multiple-companies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Analyzing multiple companies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">{tidyverse} packages:</span></span></a>
   </div>
 </li>
     </ul>
@@ -287,7 +292,7 @@ Table&nbsp;2.1: The first six lines of the whole dataset
 <td style="text-align: right;">19.21143</td>
 <td style="text-align: right;">19.28714</td>
 <td style="text-align: right;">317209200</td>
-<td style="text-align: right;">16.88733</td>
+<td style="text-align: right;">16.88732</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">AAPL</td>
@@ -297,7 +302,7 @@ Table&nbsp;2.1: The first six lines of the whole dataset
 <td style="text-align: right;">19.23893</td>
 <td style="text-align: right;">19.40929</td>
 <td style="text-align: right;">258529600</td>
-<td style="text-align: right;">16.99428</td>
+<td style="text-align: right;">16.99427</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">AAPL</td>
@@ -406,7 +411,7 @@ Table&nbsp;3.1: The first six lines of the apple dataset
 <td style="text-align: right;">63.2375</td>
 <td style="text-align: right;">69.4925</td>
 <td style="text-align: right;">370732000</td>
-<td style="text-align: right;">67.77601</td>
+<td style="text-align: right;">67.77602</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">AAPL</td>
@@ -436,7 +441,7 @@ Table&nbsp;3.1: The first six lines of the apple dataset
 <td style="text-align: right;">59.2800</td>
 <td style="text-align: right;">61.6675</td>
 <td style="text-align: right;">300233600</td>
-<td style="text-align: right;">60.14428</td>
+<td style="text-align: right;">60.14429</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">AAPL</td>
@@ -852,13 +857,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link  aria-label=" &lt;span="" packages:&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">{tidyverse} packages:</span></span>
+      <a href="./index.html" class="pagination-link  aria-label=" &lt;span="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03-understanding.html" class="pagination-link" aria-label="<span class='chapter-number'>3</span>&nbsp; <span class='chapter-title'>Understanding the data</span>">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Understanding the data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./03-understanding.html" class="pagination-link" aria-label="<span class='chapter-number'>3</span>&nbsp; <span class='chapter-title'>{tidyverse} packages:</span>">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">{tidyverse} packages:</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
