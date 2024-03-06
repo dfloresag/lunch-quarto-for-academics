@@ -5,3 +5,10 @@
 Welcome to this repo!
 
 Here are the materials for the presentation
+
+## About the book rendering
+
+As you can see in the presentation, I had trouble rendering the
+interactive book. The scripts have now been updated to render properly.
+
+Enjoy coding with Quarto!
